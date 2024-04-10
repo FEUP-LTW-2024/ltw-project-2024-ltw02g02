@@ -3,6 +3,10 @@
     $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 1");
     $stmt->execute();
     $item = $stmt->fetch();
+    $stmt = $db->prepare("SELECT * FROM Users WHERE :seller_id = user_id");
+    $stmt->bindParam(':seller_id',$item['seller_id']);
+    $stmt->execute();
+    $user = $stmt->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +14,9 @@
     <meta charset="utf-8">
     <title>OLX do OLX.</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -30,10 +34,19 @@
         </div>
     </nav>
     <main>
-        <?php
-            echo "<h1>" . $item['title'] . "</h1>";
-            echo "<img src=" . $item['image_url'] . ">";
-            echo "<p>" . $item['description'] . "</p>";
-        ?>
+        <div class="featured">
+            <?php
+                echo "<div class='imgbox'>";
+                echo "<img src=" . $item['image_url'] . ">";
+                echo "</div>";
+                echo "<div class='textbox'>";
+                echo "<h1 class='title'>" . $item['title'] . "</h1>";
+                echo "<p class='published'> Published " . date('d-m-Y H:i:s',strtotime($item['publish_date'])) . "</p>";
+                echo "<p class='description'>" . $item['description'] . "</p>";
+                echo "<p class='location'>" . $item['location'] . "</p>";
+                echo "<p class='username'>" . $user['username'] . "</p>";
+                echo "</div>";
+            ?>
+        </div>
     </main>
 </body>
