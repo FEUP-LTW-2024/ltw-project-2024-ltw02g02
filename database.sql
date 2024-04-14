@@ -6,6 +6,7 @@ CREATE TABLE Users (
     user_id INTEGER PRIMARY KEY,
     username TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
+    pfp_url TEXT DEFAULT "images/userdefault.jpg",
     password TEXT NOT NULL
 );
 
@@ -37,11 +38,14 @@ INSERT INTO Users (user_id, username, email, password) VALUES
 (3, 'user3', 'user3@example.com', 'password3'),
 (4, 'user4', 'user4@example.com', 'password4'),
 (5, 'user5', 'user5@example.com', 'password5');
+INSERT INTO Users (user_id, username, email, password, pfp_url) VALUES
+(6, 'Luis_Figo','luisfigoperdetudo@sporting.pt','lfvt123','images/luisfigo.webp');
 
 INSERT INTO Items (seller_id, title, description, price, condition, category, location, publish_date, image_url) VALUES
 (1, 'Used Laptop', 'Gently used laptop with Intel Core i5 processor', 500.00, 'Good', 'Electronics', 'New York', datetime('now', '-1 day'), 'images/laptop.jpg'),
 (2, 'Smartphone', 'Brand new smartphone with latest features', 700.00, 'Excellent', 'Electronics', 'Los Angeles', datetime('now', '-2 days'), 'images/phone.webp'),
 (3, 'Vintage Watch', 'Classic vintage watch in pristine condition', 300.00, 'Like New', 'Accessories', 'Chicago', datetime('now', '-3 days'), 'images/watch.jpg'),
 (4, 'Gaming Console', 'Used gaming console with controllers and games', 250.00, 'Good', 'Electronics', 'Houston', datetime('now', '-4 days'), 'images/ps2.webp'),
-(5, 'Bicycle', 'Mountain bike suitable for off-road trails', 450.00, 'Fair', 'Sports', 'San Francisco', datetime('now', '-5 days'), 'images/bicycle.jpg');
+(5, 'Bicycle', 'Mountain bike suitable for off-road trails', 450.00, 'Fair', 'Sports', 'San Francisco', datetime('now', '-5 days'), 'images/bicycle.jpg'),
+(6, 'Luís','O Homem está se a vender visto que não lhe resta nada (Perde tudo)', 999.99,'Used','Luis Figo','Lisboa', datetime('now','-370 days'), 'images/luisfigo.webp');
 

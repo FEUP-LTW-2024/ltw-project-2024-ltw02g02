@@ -22,18 +22,19 @@
     <nav class="navbar">
         <div class="navbar-left">
             <img src="images/menu.png" href="bota.html">
-            <i>LFVT</i>
+            <i><a href="index.php">LFVT</a></i>
         </div>
         <form class="searchbar" action="/search" method="get">
             <input type="submit" value="">
             <input type="text" name="q" placeholder="Search...">
         </form>          
         <div class="navbar-right">
-            <i>Log In</i>
-            <i>Sign Up</i>
+            <i><a href="login.php">Log In</a></i>
+            <i><a href="signup.php">Sign Up</a></i>
         </div>
     </nav>
     <main>
+        <h1> FEATURED ITEM </h1>
         <div class="featured">
             <?php
                 echo "<div class='imgbox'>";
@@ -44,9 +45,14 @@
                 echo "<p class='published'> Published " . date('d-m-Y H:i:s',strtotime($item['publish_date'])) . "</p>";
                 echo "<p class='description'>" . $item['description'] . "</p>";
                 echo "<p class='location'>" . $item['location'] . "</p>";
-                echo "<p class='username'>" . $user['username'] . "</p>";
-                echo "</div>";
             ?>
+            <div class="usercontainer">
+                <?php
+                    echo "<img class='pfp' src=" . $user['pfp_url'] . ">";
+                    echo "<p class='username'>" . $user['username'] . "</p>";
+                    echo "</div>";
+                ?>
+            </div>
         </div>
     </main>
 </body>
