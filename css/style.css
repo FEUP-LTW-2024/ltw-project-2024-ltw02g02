@@ -1,193 +1,124 @@
+@font-face {
+    font-family: 'Blackout';
+    src: url('../fonts/Blackout\ Two\ AM.ttf') format('truetype');
+}
+
 :root {
-    --primary-color: #003C43;
-    --secondary-color: #135D66;
-    --accent-gray: #D9D9D9;
+    --primary-color: #352F44;
+    --secondary-color: #5C5470;
+    --accent-gray: #B9B4C7;
     --transparent:  rgba(255,255,255,0)
-  }
+}
 
 body {
+    padding-top:50px;
     font-family: Inter;
     margin: 0;
+    background-color: var(--accent-gray);
 }
 
 .navbar {
-    font-weight: bolder;
-    font-size: 18px;
-    color: white;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    top: 0%;
     display: flex;
     background-color: var(--primary-color);
-    height: 5em;
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-top: 0;
-    padding-bottom: 0;
+}
+
+.navbar-inner {
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0px 50px 0px 50px;
 }
 
 .navbar-left {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    flex-grow: 1;
+    gap: 20px;
 }
 
 .navbar-right {
-
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
-.navbar-left img {
-    cursor: pointer;
-    width: 2em;
-}
-
-i {
+i,a {
+    font-size: 20px;
     font-style: normal;
-}
-
-i a:first-child {
-    padding-left: 1em;
-}
-
-i a:hover {
-  color:var(--secondary-color);  
-}
-
-a {
     text-decoration: none;
-    color: #FFFFFF;
+}
+
+.logo {
+    font-family: 'Blackout';
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-size: 45px;
 }
 
 .searchbar {
     display: flex;
-    margin-right: 5em;
-    margin-left: 5em;
-    flex-grow: 1;
-    background-color: var(--accent-gray);
-    padding: 15px;
-    border-radius: 20px;
-}
-
-.searchbar input:nth-of-type(1){
-    background-color: var(--transparent) ;
-    appearance: none;
-    border: none;
-    outline: none;
-    background-size: contain;
     cursor: pointer;
-    width: 2em;
-    height: 2em;
-    background-image: url("../images/searchicon.png");
+    align-items: center;
+    background-color: var(--accent-gray);
+    padding: 8px 14px 8px 10px;
+    border-radius: 9999px;
+    color: white;
+    transition: all 0.5s ease-out;
 }
 
-.searchbar input:nth-of-type(2){
-    color: #135D66;
-    flex-grow: 1;
-    margin-left: 5px;
+.searchbar input {
+    width: 0;
+    font-weight: 500;
     border: none;
     outline: none;
-    background-color: #D9D9D9;
+    background: transparent;
+    transition: all 0.5s ease-out;
 }
 
-main {
-    z-index: -1;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-h1 {
-    margin: auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    text-shadow: 0px 0px 4px #135D66;
-    color: var(--primary-color);
-
-}
-
-.featured {
-    display: grid;
-    grid-column-gap: 1.5em;
-    grid-template-columns: repeat(12,1fr);
-    margin: auto;
-    background-color: #D9D9D9;
-    border-radius: 25px;
-    z-index: 0;
-    width: 80vw;
-    height: 550px;
-}   
-
-.imgbox {
-    display: flex;
-    grid-row: 1/2;
-    grid-column: 1/8;
-    margin: 2em;
-    margin-right: 0px;
-    border-radius: 20px;
-    align-content: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.imgbox img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.textbox {
-    margin: 2em;
-    margin-left: 0px;
-    grid-row: 1/2;
-    grid-column: 8/13;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.title {
-    font-family: Inter;
-    text-transform: uppercase;
-    margin: 0px;
-    font-size: 54px;
-    color: var(--primary-color);
-    word-wrap: break-word;
-}
-
-.description {
-    font-size: 18px;
-    color: var(--secondary-color);
-}
-
-.published {
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--secondary-color)
-}
-
-.location {
-    margin-top: auto;
-    font-weight: bold;
+.searchbar i {
     font-size: 20px;
-    color: var(--secondary-color);
 }
 
-.usercontainer {
-    display: flex;
-    align-items: center;
+.searchbar:hover {
+    background-color: white;
+    color: var(--primary-color);
 }
 
-.pfp {
-    height: 75px;
-    width: auto;
-    border-radius: 50%;
-    margin-right: 20px;
+.searchbar:hover input {
+    width: 500px;
 }
-.username {
-    font-size: 20px;
-    font-weight: bolder;
-    color: var(--primary-color)
+
+.menu {
+    color: white;
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    width:400px;
+    height:700px;
+    background-color: black;
+    transform: translateX(-100%);
+    transition: 0.5s ease;
 }
+
+#menulist {
+    color: var(--accent-gray);
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.open {
+    transform: translateX(0);
+}
+
+
+
+
+
 
