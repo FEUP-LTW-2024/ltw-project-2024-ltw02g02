@@ -1,5 +1,3 @@
-
-
 :root {
     --primary-color: #003C43;
     --secondary-color: #135D66;
@@ -47,6 +45,14 @@ body {
 
 i {
     font-style: normal;
+}
+
+i a:first-child {
+    padding-left: 1em;
+}
+
+i a:hover {
+  color:var(--secondary-color);  
 }
 
 a {
