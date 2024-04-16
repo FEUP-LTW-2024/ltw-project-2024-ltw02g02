@@ -9,7 +9,7 @@
 body {
   display: grid;
   grid-template-columns: 40% 20% 40%;
-  grid-template-rows: 30% 35% 30%;
+  grid-template-rows: 30% 40% 30%;
   min-height: 100vh;
   background-color: var(--primary-color);
 }
@@ -27,23 +27,24 @@ main {
 
   display: grid;
   grid-template-columns: 10% 80% 10%;
-  grid-template-rows: 15% repeat(3, auto) 15%;
+  grid-template-rows: 2% 8% 20% 20% 20% 20% 8% 2%;
 }
 
-/* Não tenho uma conta */
-div.semconta {
+/* Já tenho uma conta */
+div.comconta {
   grid-column: 2;
-  grid-row: 1;
+  grid-row: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--primary-color);
   border-radius: 5px;
   transition: all 0.2s ease 0s;
-  font-size: 1.4em;
+  font-size: 1.5em;
+  width: auto;
 }
 
-div.semconta a {
+div.comconta a {
   color: white;
   text-decoration: none;
   padding: 0.3em;
@@ -52,7 +53,7 @@ div.semconta a {
   font-size: 1em;
 }
 
-div.semconta a:hover {
+div.comconta a:hover {
   text-shadow: 0px 0px 2px rgba(255, 255, 255, 1);
   font-size: 1.03em;
 }
@@ -60,15 +61,22 @@ div.semconta a:hover {
 /* Email */
 div.email {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 3;
   font-size: 1.5em;
 }
 
 /* Password */
 div.password {
   grid-column: 2;
-  grid-row: 3;
+  grid-row: 4;
   font-size: 1.5em;
+}
+
+div.confirm-password {
+  grid-column: 2;
+  grid-row: 5;
+  font-size: 1.5em;
+
 }
 
 .searchbar input {
@@ -80,18 +88,16 @@ div.password {
   width: 100%;
 }
 
-/* Botão entrar */
-div.entrar {
-  grid-column: 2 / 3;
-  grid-row: 4;
+/* Botão register */
+div.register {
+  grid-column: 2;
+  grid-row: 6;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
-div.entrar a {
-  width: 100%;
+div.register a {
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;
@@ -100,12 +106,9 @@ div.entrar a {
   transition: all 0.2s ease 0s;
   border: none;
   font-size: 1.5em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-div.entrar a:hover {
+div.register a:hover {
   text-shadow: 0px 0px 2px rgba(255, 255, 255, 1);
   font-size: 1.53em;
 }
@@ -113,7 +116,7 @@ div.entrar a:hover {
 /* Página Inicial */
 body > main > h3 {
   grid-column: 2;
-  grid-row: 5;
+  grid-row: 7;
   display: flex;
   justify-content: center;
   align-items: center;
