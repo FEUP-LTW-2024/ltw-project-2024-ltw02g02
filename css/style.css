@@ -53,6 +53,7 @@ i,a {
     font-size: 20px;
     font-style: normal;
     text-decoration: none;
+    text-align: center  ;
 }
 
 .logo {
@@ -95,6 +96,27 @@ i,a {
     width: 500px;
 }
 
+.menuicons {
+    position: relative;
+}
+
+#menulist,#menuclosed {
+    position: absolute;
+    cursor: pointer;
+    transform: translateX(-50%) translateY(-50%);
+    width: 40px;
+    transition: all 0.5s ease;
+}
+
+#menulist {
+    z-index: 1;
+}
+
+.dissapear {
+    opacity: 0.25;
+    scale: 0.5;
+}
+
 .menu {
     color: white;
     position: fixed;
@@ -107,12 +129,7 @@ i,a {
     transition: 0.5s ease;
 }
 
-#menulist {
-    color: var(--accent-gray);
-    cursor: pointer;
-    font-size: 30px;
-}
-
 .open {
     transform: translateX(0);
 }
+
