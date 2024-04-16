@@ -5,24 +5,24 @@
 </head>
 <body>
     <main>
-        <div>
-            <i><a href="signup.php">Não tenho uma conta</a></i>
+        <div class="semconta">
+            <a href="signup.php">Não tenho uma conta</a>
         </div>
         <div class="email">
             <i>Email</i>
             <form class="searchbar">
-                <input type="text" name="q" placeholder="">
+                <input name="username" type="email">
             </form>
         </div>
         <div class="password">
             <i>Password</i>
             <form class="searchbar">
-                <input type="text" name="q">
+                <input name="password" type="password">
             </form>
         </div>
-        <div>
-            <button type="submit">Entrar</button>
+        <div class="entrar">
+            <a href="index.php">Entrar</a>
         </div>
-        <h3><a href="index.php">Back</a></h3>
+        <h3><a href="index.php">Página Inicial</a></h3>
     </main>
 </body>
