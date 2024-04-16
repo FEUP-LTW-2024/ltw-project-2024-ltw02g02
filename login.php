@@ -23,6 +23,6 @@
         <div>
             <button type="submit">Entrar</button>
         </div>
+        <h3><a href="index.php">Back</a></h3>
     </main>
-    <h3><a href="index.php">Back</a></h3>
 </body>
