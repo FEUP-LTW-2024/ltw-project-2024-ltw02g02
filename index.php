@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>OLX do OLX.</title>
+    <title>hand2hand</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
     <nav class="navbar">
         <div class="navbar-left">
             <img src="images/menu.png" href="bota.html">
-            <i><a href="index.php">LFVT</a></i>
+            <i><a href="index.php">hand2hand</a></i>
         </div>
         <form class="searchbar" action="/search" method="get">
             <input type="submit" value="">

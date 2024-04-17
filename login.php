@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <Title>Log In</Title>
+    <Title>hand2hand - Log In</Title>
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/responsive-login.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
