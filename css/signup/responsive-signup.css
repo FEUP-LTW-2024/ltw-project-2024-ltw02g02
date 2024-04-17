@@ -1,0 +1,83 @@
+:root {
+    --primary-color: #352F44;
+    --secondary-color: #5C5470;
+    --accent-gray: #B9B4C7;
+    --transparent:  rgba(255,255,255,0)
+  }
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 1293px) {
+    /* Não tenho uma conta */
+    div.comconta {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        font-size: 1.2em;
+      }
+      
+    div.comconta a {
+        color: var(--primary-color);
+        text-decoration: none;
+        padding: 0.3em;
+        border-radius: 5px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    div.comconta a:hover {
+        text-shadow: 0px 0px 2px rgba(255, 255, 255, 1);
+        font-size: 1.03em;
+    }
+
+    h3 a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 675px) {
+    /* Remover não tenho uma conta */
+    body {
+        display: grid;
+        grid-template-columns: 30% 40% 30%;
+        grid-template-rows: 35% 30% 35%;
+    }
+
+    div.comconta {
+        display: none;
+    }
+
+    h3 a {
+        display: none;
+    }
+}
+
+@media (max-height: 750px) {
+    /* Remover não tenho uma conta */
+    body {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+        grid-template-rows: 31% 38% 31%;
+    }
+
+    div.comconta {
+        display: none;
+    }
+
+    div.register {
+        grid-row: 6/9;
+    }
+
+    div.register a {
+        background-color: transparent;
+        color: var(--primary-color);
+    }
+
+    h3 a {
+        display: none;
+    }
+}

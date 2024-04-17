@@ -9,7 +9,7 @@
 body {
   display: grid;
   grid-template-columns: 40% 20% 40%;
-  grid-template-rows: 30% 40% 30%;
+  grid-template-rows: 30% 35% 30%;
   min-height: 100vh;
   background-color: var(--primary-color);
 }
@@ -27,33 +27,34 @@ main {
 
   display: grid;
   grid-template-columns: 10% 80% 10%;
-  grid-template-rows: 2% 8% 20% 20% 20% 20% 8% 2%;
+  grid-template-rows: 15% repeat(3, auto) 15%;
 }
 
-/* Já tenho uma conta */
-div.comconta {
+/* Não tenho uma conta */
+div.semconta {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--primary-color);
   border-radius: 5px;
-  transition: all 0.2s ease 0s;
-  font-size: 1.5em;
-  width: auto;
+  font-size: 1.4em;
+  display:block;
 }
 
-div.comconta a {
+div.semconta a {
   color: white;
   text-decoration: none;
   padding: 0.3em;
   border-radius: 5px;
-  transition: all 0.2s ease 0s;
   font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-div.comconta a:hover {
+div.semconta a:hover {
   text-shadow: 0px 0px 2px rgba(255, 255, 255, 1);
   font-size: 1.03em;
 }
@@ -61,22 +62,15 @@ div.comconta a:hover {
 /* Email */
 div.email {
   grid-column: 2;
-  grid-row: 3;
+  grid-row: 2;
   font-size: 1.5em;
 }
 
 /* Password */
 div.password {
   grid-column: 2;
-  grid-row: 4;
+  grid-row: 3;
   font-size: 1.5em;
-}
-
-div.confirm-password {
-  grid-column: 2;
-  grid-row: 5;
-  font-size: 1.5em;
-
 }
 
 .searchbar input {
@@ -88,27 +82,30 @@ div.confirm-password {
   width: 100%;
 }
 
-/* Botão register */
-div.register {
-  grid-column: 2;
-  grid-row: 6;
+/* Botão entrar */
+div.entrar {
+  grid-column: 2 / 3;
+  grid-row: 4;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-div.register a {
+div.entrar a {
+  width: 100%;
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;
   padding: 0.8em;
   border-radius: 5px;
-  transition: all 0.2s ease 0s;
   border: none;
   font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-div.register a:hover {
+div.entrar a:hover {
   text-shadow: 0px 0px 2px rgba(255, 255, 255, 1);
   font-size: 1.53em;
 }
@@ -116,7 +113,7 @@ div.register a:hover {
 /* Página Inicial */
 body > main > h3 {
   grid-column: 2;
-  grid-row: 7;
+  grid-row: 5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,8 +124,11 @@ h3 a {
   text-decoration: none;
   padding: 0.3em;
   border-radius: 5px;
-  transition: all 0.2s ease 0s;
   font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 h3 a:hover {
