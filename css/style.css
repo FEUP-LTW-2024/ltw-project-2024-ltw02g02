@@ -180,7 +180,8 @@ article {
     background-image: linear-gradient(to bottom, var(--hyperlink-color), var(--secondary-color));
     flex-grow: 1;
     min-width: 250px;
-    width: 250px;
+    width: 20vw;
+    max-width: 20vw;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 5px;
