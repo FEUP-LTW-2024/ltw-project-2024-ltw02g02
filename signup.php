@@ -22,16 +22,25 @@ function emailExists($email) {
 $username = $_POST['username'];
 $email = $_POST['email'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$confirm_password = $_POST['confirm_password'];
 
-if (userExists($username))
-    die("Usuário já existe!");
+if (userExists($username)) {
+    $errorMessage = "Usuário já existe!";
+    header("Location: signup.html?error=" . urlencode($errorMessage));
+    exit;
+}
 
-if (emailExists($email))
-    die("Email já existe!");
+if (emailExists($email)) {
+    $errorMessage = "Email já existe!";
+    header("Location: signup.html?error=" . urlencode($errorMessage));
+    exit;
+}
 
-// Verifica se password é igual à confirmação de password
-if ($_POST['password'] !== $_POST['confirm_password'])
-    die("As senhas não coincidem!");
+if ($_POST['password'] !== $confirm_password) {
+    $errorMessage = "As passwords não coincidem!";
+    header("Location: signup.html?error=" . urlencode($errorMessage));
+    exit;
+}
 
 // Se tudo estiver certo, podemos fazer a conexão com a base de dados
 $dbh = new PDO('sqlite:database.db');
@@ -45,14 +54,15 @@ $stmt->bindParam(':email', $email);
 $stmt->bindParam(':password', $password);
 
 // Executar a query
-$stmt->execute();
+$result = $stmt->execute();
 
-if ($stmt->rowCount() > 0) {
-echo "Usuário registrado com sucesso!";
-}
-
-else {
-    echo "Método de requisição inválido.";
+if ($result) {
+    header("Location: login.html");
+    exit;
+} else {
+    $errorMessage = "Erro ao registrar!";
+    header("Location: signup.html?error=" . urlencode($errorMessage));
+    exit;
 }
 
 ?>
