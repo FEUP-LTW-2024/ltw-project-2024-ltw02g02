@@ -1,36 +1,68 @@
-<!DOCTYPE html>
-<head>
-    <Title>hand2hand - Sign Up</Title>
-    <link rel="stylesheet" href="css/signup.css">
-    <link rel="stylesheet" href="css/responsive-signup.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <main>
-        <div class="comconta">
-            <a href="login.php">Já tenho uma conta</a>
-        </div>
-        <div class="email">
-            <i>Email</i>
-            <form class="searchbar">
-                <input name="username" type="email">
-            </form>
-        </div>
-        <div class="password">
-            <i>Password</i>
-            <form class="searchbar">
-                <input name="password" type="password">
-            </form>
-        </div>
-        <div class="confirm-password">
-            <i>Confirma</i>
-            <form class="searchbar">
-                <input name="password" type="password">
-            </form>
-        </div>
-        <div class="register">
-            <a href="index.php">Registrar</a>
-        </div>
-        <h3><a href="index.php">Página Inicial</a></h3>
-    </main>
-</body>
+<?php
+
+// Verifica se o username já existe
+function userExists($username) {
+    $dbh = new PDO('sqlite:database.db');
+    $stmt = $dbh->prepare("SELECT * FROM Users WHERE username = :username");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    return $stmt->fetch() !== false;
+}
+
+// Verifica se o email já existe
+function emailExists($email) {
+    $dbh = new PDO('sqlite:database.db');
+    $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->fetch() !== false;
+}
+
+// Atribuir valores aos parâmetros
+$username = $_POST['username'];
+$email = $_POST['email'];
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$confirm_password = $_POST['confirm_password'];
+
+if (userExists($username)) {
+    $errorMessage = "Usuário já existe!";
+    header("Location: signup.html?error=" . urlencode($errorMessage));
+    exit;
+}
+
+if (emailExists($email)) {
+    $errorMessage = "Email já existe!";
+    header("Location: signup.html?error=" . urlencode($errorMessage));
+    exit;
+}
+
+if ($_POST['password'] !== $confirm_password) {
+    $errorMessage = "As passwords não coincidem!";
+    header("Location: signup.html?error=" . urlencode($errorMessage));
+    exit;
+}
+
+// Se tudo estiver certo, podemos fazer a conexão com a base de dados
+$dbh = new PDO('sqlite:database.db');
+
+// Prepara a query
+$stmt = $dbh->prepare("INSERT INTO Users (username, email, password) VALUES (:username, :email, :password)");
+
+// Vincular os parâmetros
+$stmt->bindParam(':username', $username);
+$stmt->bindParam(':email', $email);
+$stmt->bindParam(':password', $password);
+
+// Executar a query
+$result = $stmt->execute();
+
+if ($result) {
+    header("Location: login.html");
+    exit;
+} else {
+    $errorMessage = "Erro ao registrar!";
+    header("Location: signup.html?error=" . urlencode($errorMessage));
+    exit;
+}
+
+?>

@@ -7,6 +7,8 @@
 
 /* Divisão da página com grid e configurações iniciais */
 body {
+  min-width: 375px;
+  overflow: auto;
   display: grid;
   grid-template-columns: 40% 20% 40%;
   grid-template-rows: 30% 40% 30%;
@@ -18,16 +20,12 @@ body {
 main {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-  display: flex;
-  flex-direction: column;
-  justify-content:normal;
-  align-items: center;
   background-color: white;
   border-radius: 10px;
 
   display: grid;
   grid-template-columns: 10% 80% 10%;
-  grid-template-rows: 2% 8% 20% 20% 20% 20% 8% 2%;
+  grid-template-rows: 2% 7% 83% 6% 2%;
 }
 
 /* Já tenho uma conta */
@@ -56,28 +54,30 @@ div.comconta a:hover {
   font-size: 1.03em;
 }
 
-/* Email */
-div.email {
+/* Email e password */
+
+form {
   grid-column: 2;
   grid-row: 3;
-  font-size: 1.5em;
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Password */
-div.password {
-  grid-column: 2;
-  grid-row: 4;
-  font-size: 1.5em;
+form > div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
 }
 
-div.confirm-password {
-  grid-column: 2;
-  grid-row: 5;
-  font-size: 1.5em;
-
+div > i {
+  color: var(--primary-color);
+  margin-bottom: 0.3em;
 }
 
-.searchbar input {
+input {
   margin-top: 0.5em;
   background: #F2F4F5;
   border: none;
@@ -87,46 +87,40 @@ div.confirm-password {
 }
 
 /* Botão register */
-div.register {
-  grid-column: 2;
-  grid-row: 6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-div.register a {
+button {
   width: 100%;
   background-color: var(--primary-color);
   color: white;
   text-decoration: none;
   padding: 0.8em;
+  margin-top: 0.3em;
   border-radius: 5px;
   border: none;
-  font-size: 1.5em;
+  font-size: 0.8em;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-div.register a:hover {
+button:hover {
   text-shadow: 0px 0px 2px rgba(255, 255, 255, 1);
-  font-size: 1.53em;
+  font-size: 0.83em;
 }
 
 /* Página Inicial */
 body > main > h3 {
   grid-column: 2;
-  grid-row: 7;
+  grid-row: 4;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 0.3em;
 }
 
 h3 a {
   color: var(--primary-color);
   text-decoration: none;
-  padding: 0.3em;
   border-radius: 5px;
   font-size: 1em;
   text-align: center;

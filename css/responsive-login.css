@@ -5,9 +5,9 @@
     --transparent:  rgba(255,255,255,0)
   }
 
-/* RESPONSIVE DESIGN */
+/* WIDTH */
 
-@media (max-width: 1293px) {
+@media (max-width: 1315px) {
     /* Não tenho uma conta */
     div.semconta {
         grid-column: 2;
@@ -41,7 +41,7 @@
     }
 }
 
-@media (max-width: 675px) {
+@media (max-width: 650px) {
     /* Remover não tenho uma conta */
     body {
         display: grid;
@@ -58,11 +58,19 @@
     }
 }
 
+@media (max-width: 375px) {
+    body {
+        background-color: white;
+    }
+}
+
+/* HEIGHT */
+
 @media (max-height: 750px) {
     /* Remover não tenho uma conta */
     body {
         display: grid;
-        grid-template-columns: 40% 20% 40%;
+        grid-template-columns: 25% 50% 25%;
         grid-template-rows: 31% 38% 31%;
     }
 
@@ -80,7 +88,7 @@
 }
 
 @media (max-height: 615px) {
-    div.entrar {
-        display: none;
+    body {
+        background-color: white;
     }
 }

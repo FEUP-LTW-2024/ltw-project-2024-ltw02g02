@@ -1,30 +1,39 @@
-<!DOCTYPE html>
-<head>
-    <Title>hand2hand - Log In</Title>
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/responsive-login.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <main>
-        <div class="semconta">
-            <a href="signup.php">Não tenho uma conta</a>
-        </div>
-        <div class="email">
-            <i>Email</i>
-            <form class="searchbar">
-                <input name="username" type="email">
-            </form>
-        </div>
-        <div class="password">
-            <i>Password</i>
-            <form class="searchbar">
-                <input name="password" type="password">
-            </form>
-        </div>
-        <div class="entrar">
-            <a href="index.php">Entrar</a>
-        </div>
-        <h3><a href="index.php">Página Inicial</a></h3>
-    </main>
-</body>
+<?php
+
+function emailExists($email) {
+    $dbh = new PDO('sqlite:database.db');
+    $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->fetch() !== false;
+}
+
+function correctPassword($email, $password) {
+    $dbh = new PDO('sqlite:database.db');
+    $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $user = $stmt->fetch();
+    return $user !== false && password_verify($password, $user['password']);
+}
+
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+if (!emailExists($email)) {
+    $errorMessage = "Email não existe!";
+    header("Location: login.html?error=" . urlencode($errorMessage));
+    exit;
+}
+
+if (!correctPassword($email, $password)) {
+    $errorMessage = "Password incorreta!";
+    header("Location: login.html?error=" . urlencode($errorMessage));
+    exit;
+}
+
+session_start();
+$_SESSION['email'] = $email;
+header("Location: index.html");
+
+?>
