@@ -1,11 +1,13 @@
 <?php
     $db = new PDO("sqlite:database.db");
-    $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 4");
+    $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
+    $stmt->bindParam(":id",$_GET['item_id']);
     $stmt->execute();
-    $items1 = $stmt->fetchAll();
-    $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 4");
+    $item = $stmt->fetch();
+    $stmt = $db->prepare("SELECT * FROM Users WHERE user_id = :id");
+    $stmt->bindParam(":id", $item["seller_id"]);
     $stmt->execute();
-    $items2 = $stmt->fetchAll();
+    $user = $stmt->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -40,33 +42,17 @@
     </nav>
     <div id="menu" class="menu">Guilherme é Gay</div>
     <script src="script/script.js"></script>
-    <main>
-        <h1> FEATURED ITEMS </h1>
-        <div class="featured">
-            <?php
-            foreach ($items1 as $item) {
-                echo "<article>
-                <div class='imgbox'>
-                    <img src='" . $item['image_url'] . "'>
-                </div>
-                <a class='title' href='item.php?item_id=" . $item['item_id'] . "'>" . $item['title'] . "</a>
-                <p class ='small-text'>" . $item['location'] . "</p>
-                <p class ='small-text'>Published    " . $item['publish_date'] . "</p>
-            </article>";
-            }
-
-            foreach ($items2 as $item) {
-                echo "<article>
-                <div class='imgbox'>
-                    <img src='" . $item['image_url'] . "'>
-                </div>
-                <a class='title' href='item.php?item_id=" . $item['item_id'] . "'>" . $item['title'] . "</a>
-                <p class ='small-text'>" . $item['location'] . "</p>
-                <p class ='small-text'>Published " . $item['publish_date'] . "</p>
-            </article>";
-            }
-            ?>
-            </div>
-        </div>
-    </main>
+<main>
+<?php
+    echo "<h1>" . $item["title"] . "</h1>
+    <img src=" . $item["image_url"] . ">
+    <p>" . $item["description"] . "</p>
+    <ul>
+        <li>" . $item["publish_date"] . "</li>
+        <li>". $item["location"] . "</li
+    </ul>
+    <h2>" . $user['username'] . "</h2>
+    <img src='" . $user["pfp_url"] . "'>";
+?>
+</main>
 </body>
