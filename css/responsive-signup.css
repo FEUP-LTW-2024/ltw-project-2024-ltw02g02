@@ -5,10 +5,9 @@
     --transparent:  rgba(255,255,255,0)
   }
 
-/* RESPONSIVE DESIGN */
+/* WIDTH */
 
 @media (max-width: 1293px) {
-    /* Não tenho uma conta */
     div.comconta {
         display: flex;
         justify-content: center;
@@ -39,12 +38,11 @@
     }
 }
 
-@media (max-width: 675px) {
-    /* Remover não tenho uma conta */
+@media (max-width: 750px) {
     body {
         display: grid;
         grid-template-columns: 30% 40% 30%;
-        grid-template-rows: 35% 30% 35%;
+        grid-template-rows: 30% 40% 30%;
     }
 
     div.comconta {
@@ -56,11 +54,19 @@
     }
 }
 
+@media (max-width: 375px) {
+    body {
+        background-color: white;
+    }
+}
+
+/* HEIGHT */
+
 @media (max-height: 750px) {
     /* Remover não tenho uma conta */
     body {
         display: grid;
-        grid-template-columns: 40% 20% 40%;
+        grid-template-columns: 30% 40% 30%;
         grid-template-rows: 31% 38% 31%;
     }
 

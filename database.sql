@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS Items;
 DROP TABLE IF EXISTS Carts;
 
 CREATE TABLE Users (
-    user_id INTEGER PRIMARY KEY,
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
     pfp_url TEXT DEFAULT "images/userdefault.jpg",
@@ -11,7 +11,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Items (
-    item_id INTEGER PRIMARY KEY,
+    item_id INTEGER PRIMARY KEY AUTOINCREMENT,
     seller_id INTEGER NOT NULL,
     title TEXT NOT NULL,
     description TEXT,
@@ -38,6 +38,7 @@ INSERT INTO Users (user_id, username, email, password) VALUES
 (3, 'user3', 'user3@example.com', 'password3'),
 (4, 'user4', 'user4@example.com', 'password4'),
 (5, 'user5', 'user5@example.com', 'password5');
+
 INSERT INTO Users (user_id, username, email, password, pfp_url) VALUES
 (6, 'Luis_Figo','luisfigoperdetudo@sporting.pt','lfvt123','images/luisfigo.webp');
 
