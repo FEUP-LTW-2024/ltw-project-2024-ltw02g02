@@ -10,21 +10,20 @@
         <div class="semconta">
             <a href="signup.html">Não tenho uma conta</a>
         </div>
-        <div class="email">
-            <i>Email</i>
-            <form class="searchbar">
-                <input name="username" type="email">
-            </form>
-        </div>
-        <div class="password">
-            <i>Password</i>
-            <form class="searchbar">
-                <input name="password" type="password">
-            </form>
-        </div>
-        <div class="entrar">
-            <a href="index.html">Entrar</a>
-        </div>
+        <form class="login-form" action="login.php" method="post">
+            <div class="email">
+                <i>Email</i>
+                <input name="email" type="email" required>
+            </div>
+            <div class="password">
+                <i>Password</i>
+                <input name="password" type="password" required>
+            </div>
+            <div class="entrar">
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
         <h3><a href="index.html">Página Inicial</a></h3>
     </main>
+    <script src="script/errors.js"></script>
 </body>

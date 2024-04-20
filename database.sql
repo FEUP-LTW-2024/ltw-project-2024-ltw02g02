@@ -33,14 +33,14 @@ CREATE TABLE Carts (
 );
 
 INSERT INTO Users (user_id, username, email, password) VALUES 
-(1, 'user1', 'user1@example.com', 'password1'),
-(2, 'user2', 'user2@example.com', 'password2'),
-(3, 'user3', 'user3@example.com', 'password3'),
-(4, 'user4', 'user4@example.com', 'password4'),
-(5, 'user5', 'user5@example.com', 'password5');
+(1, 'user1', 'user1@example.com', '$2y$10$hzKLPw0J4eV5oM4ZUfcE3e.Z9bjl9xj0wx9HMisHUTS3MUEGETLQW'),
+(2, 'user2', 'user2@example.com', '$2y$10$c2SNCgaMaY1BZbVR5/GOO.FtOtPZIfxG5veQ1iNCDZrDe6WmiANB2'),
+(3, 'user3', 'user3@example.com', '$2y$10$HLePLN/dZ1ESgnjYfSIObuwYdtPQgeUTR5s/t0D/U1oa5o55f93aS'),
+(4, 'user4', 'user4@example.com', '$2y$10$hPcqM3IYFwU78vX2ajx1velGiByPHzL7sA45tuKcPLFq.7BF4.i96'),
+(5, 'user5', 'user5@example.com', '$2y$10$ukqBVYcE1CCHf0M4GJAUD.4UtE23I.2MEeFKtcWr7jBbLmtC2gvVm');
 
 INSERT INTO Users (user_id, username, email, password, pfp_url) VALUES
-(6, 'Luis_Figo','luisfigoperdetudo@sporting.pt','lfvt123','images/luisfigo.webp');
+(6, 'Luis_Figo','luisfigoperdetudo@sporting.pt','$2y$10$27FzWMYrfrGo7J/DffeMHuUF6bh1x4vjRH86cRRdohKY9KpZR.io.','images/luisfigo.webp');
 
 INSERT INTO Items (seller_id, title, description, price, condition, category, location, publish_date, image_url) VALUES
 (1, 'Used Laptop', 'Gently used laptop with Intel Core i5 processor', 500.00, 'Good', 'Electronics', 'New York', datetime('now', '-1 day'), 'images/laptop.jpg'),

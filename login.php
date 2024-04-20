@@ -5,7 +5,7 @@ function emailExists($email) {
     $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
-    return $stmt->fetch() === false;
+    return $stmt->fetch() !== false;
 }
 
 function correctPassword($email, $password) {
@@ -34,5 +34,6 @@ if (!correctPassword($email, $password)) {
 
 session_start();
 $_SESSION['email'] = $email;
-header("Location: index.php");
+header("Location: index.html");
+
 ?>
