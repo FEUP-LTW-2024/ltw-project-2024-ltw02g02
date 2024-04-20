@@ -8,13 +8,13 @@
     $stmt->bindParam(":id", $item["seller_id"]);
     $stmt->execute();
     $user = $stmt->fetch();
+    $images = explode(',',$item['image_url']);
 ?>
-
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Hand2Hand</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Item Test</title>
+    <link rel="stylesheet" href="css/item-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -42,17 +42,45 @@
     </nav>
     <div id="menu" class="menu">Guilherme é Gay</div>
     <script src="script/script.js"></script>
-<main>
-<?php
-    echo "<h1>" . $item["title"] . "</h1>
-    <img src=" . $item["image_url"] . ">
-    <p>" . $item["description"] . "</p>
-    <ul>
-        <li>" . $item["publish_date"] . "</li>
-        <li>". $item["location"] . "</li
-    </ul>
-    <h2>" . $user['username'] . "</h2>
-    <img src='" . $user["pfp_url"] . "'>";
-?>
-</main>
+    <main>
+        <div id=container1>
+            <div id="img-slider">
+
+                <?php 
+                foreach ($images as $image) {
+                    echo "<div class ='img-container'>
+                            <img  class='background' src='" . $image . "'>
+                            <img class='slide' src=" . $image . ">
+                        </div>";
+                };
+                ?>
+
+                <a class="prev-button" onclick="moveSlides(-1)">&#10094;</a>
+                <a class="next-button" onclick="moveSlides(1)">&#10095;</a>
+            </div>
+            <script src="script/slider.js"></script>
+        </div>
+        <div id="container2">
+            <div id="ad-header">
+                <h1 class="title"><?php echo $item['title']; ?></h1>
+                <h2><?php echo $item['price']; ?></h2>
+                <p class="small-text">Listed on the <?php echo date('jS M Y',$item['title']); ?></p>
+            </div>
+            <div id="description-box"> 
+                <h2>Seller's description</h2>
+                <div id="description-scroll">
+                        <p class="description"><?php echo $item['description']; ?></p>
+                </div>
+                <p class="location"><?php echo $item['location']; ?></p>
+            </div>
+            <div id="seller">
+                <h2>Seller Information</h2>
+                <div class="user-box">
+                    <img id="profile-picture" src="<?php echo $user['pfp_url']; ?>">
+                    <a id="seller-name" href="user.html"><?php echo $user['username']; ?></p>
+                </div>
+                <p class="small-text">Joined 2001</p>
+            </div>
+        </div>
+    </main>
 </body>
