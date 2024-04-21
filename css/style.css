@@ -224,3 +224,41 @@ article {
     font-size: 12px;
     color: var(--accent-gray);
 }
+
+
+/* Categorias */
+
+
+.categories {
+z-index: -1;
+}
+
+
+.categories .category img {
+    width: 100%;
+    max-height: 200px;
+    background-size: cover;
+    filter: blur(1px);
+    border-radius: 10px;
+}
+
+.category {
+    position: relative;
+}
+
+
+.category h3 {
+    backdrop-filter: blur(6px);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    border-width: 3px;
+    border-style: solid;
+    border-color: white;
+    border-radius: 10px;
+    padding: 22px;
+}
+
