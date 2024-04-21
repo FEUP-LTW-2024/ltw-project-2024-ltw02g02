@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $db = new PDO("sqlite:database.db");
     $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
     $stmt->bindParam(":id",$_GET['id']);
@@ -37,8 +38,13 @@
                 </form>
             </div>    
             <div class="navbar-right">
-                <li><a href="login.php">Log In</a></li>
-                <li><a href="signup.php">Sign Up</a></li>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li><a href="profile.php"><img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>"> Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login.html">Log In</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
