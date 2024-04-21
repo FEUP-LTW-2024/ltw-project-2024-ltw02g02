@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-<body>
     <nav class="navbar">
         <div class="navbar-inner">
             <div class="navbar-left">
@@ -30,7 +29,7 @@
             <div class="navbar-right">
                 <?php if (isset($_SESSION['username'])): ?>
                     <li><a href="profile.php"><img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>"> Profile</a></li>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><a href="wishlist.html">Wishlist</a></li>
                 <?php else: ?>
                     <li><a href="login.html">Log In</a></li>
                     <li><a href="signup.html">Sign Up</a></li>
@@ -131,3 +130,4 @@
             ?>
         </div>
     </main>
+</body>

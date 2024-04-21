@@ -17,7 +17,6 @@ slides.forEach( (slide, index) => {
 
 // Scale All Images
 
-
 slides.forEach  ( (slide) => {
     var image = slide.querySelector('.slide');
     if ((image.naturalWidth / image.naturalHeight) > 1) {
