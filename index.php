@@ -1,8 +1,5 @@
 <?php
-    $db = new PDO("sqlite:database.db");
-    $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 8");
-    $stmt->execute();
-    $items = $stmt->fetchAll();
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +28,85 @@
                 </form>
             </div>    
             <div class="navbar-right">
-                <li><a href="login.php">Log In</a></li>
-                <li><a href="signup.php">Sign Up</a></li>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <li><a href="profile.php"><img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>"> Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="login.html">Log In</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                <?php endif; ?>
+            </div>
+        </div>
+    </nav>
+    <div id="menu" class="menu">Guilherme é Gay</div>
+    <script src="script/script.js"></script>
+    <main>
+        <h1> FEATURED ITEMS </h1>
+        <div class="featured">
+            <article>
+                <div class="imgbox">
+                    <img src="images/ps2.webp">
+                </div>
+                <a class="title" href="item.html">Title Text Example</a>
+                <p class ="small-text">Praia da Vitória</p>
+                <p class ="small-text">Published 01-01-2000 00:00</p>
+            </article>
+            <article>
+                <div class="imgbox">
+                    <img src="images/ps2.webp">
+                </div>
+                <a class="title" href="item.html">Title Text Example</a>
+                <p class ="small-text">Praia da Vitória</p>
+                <p class ="small-text">Published 01-01-2000 00:00</p>
+            </article>
+            <article>
+                <div class="imgbox">
+                    <img src="images/ps2.webp">
+                </div>
+                <a class="title" href="item.html">Title Text Example</a>
+                <p class ="small-text">Praia da Vitória</p>
+                <p class ="small-text">Published 01-01-2000 00:00</p>
+            </article>
+            <article>
+                <div class="imgbox">
+                    <img src="images/ps2.webp">
+                </div>
+                <a class="title" href="item.html">Title Text Example</a>
+                <p class ="small-text">Praia da Vitória</p>
+                <p class ="small-text">Published 01-01-2000 00:00</p>
+            </article>
+            <article>
+                <div class="imgbox">
+                    <img src="images/ps2.webp">
+                </div>
+                <a class="title" href="item.html">Title Text Example</a>
+                <p class ="small-text">Praia da Vitória</p>
+                <p class ="small-text">Published 01-01-2000 00:00</p>
+            </article>
+            <article>
+                <div class="imgbox">
+                    <img src="images/ps2.webp">
+                </div>
+                <a class="title" href="item.html">Title Text Example</a>
+                <p class ="small-text">Praia da Vitória</p>
+                <p class ="small-text">Published 01-01-2000 00:00</p>
+            </article>
+            <article>
+                <div class="imgbox">
+                    <img src="images/ps2.webp">
+                </div>
+                <a class="title" href="item.html">Title Text Example</a>
+                <p class ="small-text">Praia da Vitória</p>
+                <p class ="small-text">Published 01-01-2000 00:00</p>
+            </article>
+            <article>
+                <div class="imgbox">
+                    <img src="images/ps2.webp">
+                </div>
+                <a class="title" href="item.html">Title Text Example</a>
+                <p class ="small-text">Praia da Vitória</p>
+                <p class ="small-text">Published 01-01-2000 00:00</p>
+            </article>
             </div>
         </div>
     </nav>
