@@ -1,11 +1,8 @@
 <?php
     $db = new PDO("sqlite:database.db");
-    $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 4");
+    $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 8");
     $stmt->execute();
-    $items1 = $stmt->fetchAll();
-    $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 4");
-    $stmt->execute();
-    $items2 = $stmt->fetchAll();
+    $items = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -45,23 +42,14 @@
         <h1> FEATURED ITEMS </h1>
         <div class="featured">
             <?php
-            foreach ($items1 as $item) {
+            foreach ($items as $item) {
+                $images = explode(",", $item["image_url"]);
+                $image = $images[0];
                 echo "<article>
                 <div class='imgbox'>
-                    <img src='" . $item['image_url'] . "'>
+                    <img src='" . $image . "'>
                 </div>
-                <a class='title' href='item.php?=" . $item['item_id'] . "'>" . $item['title'] . "</a>
-                <p class ='small-text'>" . $item['location'] . "</p>
-                <p class ='small-text'>Published " . $item['publish_date'] . "</p>
-            </article>";
-            }
-
-            foreach ($items2 as $item) {
-                echo "<article>
-                <div class='imgbox'>
-                    <img src='" . $item['image_url'] . "'>
-                </div>
-                <a class='title' href='item.html'>" . $item['title'] . "</a>
+                <a class='title' href='item.php?id=" . $item['item_id'] . "'>" . $item['title'] . "</a>
                 <p class ='small-text'>" . $item['location'] . "</p>
                 <p class ='small-text'>Published " . $item['publish_date'] . "</p>
             </article>";

@@ -1,7 +1,7 @@
 <?php
     $db = new PDO("sqlite:database.db");
     $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
-    $stmt->bindParam(":id",$_GET['item_id']);
+    $stmt->bindParam(":id",$_GET['id']);
     $stmt->execute();
     $item = $stmt->fetch();
     $stmt = $db->prepare("SELECT * FROM Users WHERE user_id = :id");
@@ -9,6 +9,8 @@
     $stmt->execute();
     $user = $stmt->fetch();
     $images = explode(',',$item['image_url']);
+    $timestamp = strtotime($item['publish_date']);
+    $currency = '€'
 ?>
 <!DOCTYPE html>
 <head>
@@ -63,8 +65,8 @@
         <div id="container2">
             <div id="ad-header">
                 <h1 class="title"><?php echo $item['title']; ?></h1>
-                <h2><?php echo $item['price']; ?></h2>
-                <p class="small-text">Listed on the <?php echo date('jS M Y',$item['title']); ?></p>
+                <h2><?php echo $currency . number_format($item['price'],2,".",","); ?></h2>
+                <p class="small-text">Listed on the <?php echo date('jS M Y',$timestamp); ?></p>
             </div>
             <div id="description-box"> 
                 <h2>Seller's description</h2>
