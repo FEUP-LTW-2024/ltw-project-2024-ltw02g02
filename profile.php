@@ -1,16 +1,12 @@
 <?php
     session_start();
-    $db = new PDO("sqlite:database.db");
-    $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 8");
-    $stmt->execute();
-    $items = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
     <title>Hand2Hand</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -44,22 +40,16 @@
     <div id="menu" class="menu">Guilherme é Gay</div>
     <script src="script/script.js"></script>
     <main>
-        <h1> FEATURED ITEMS </h1>
-        <div class="featured">
-            <?php
-            foreach ($items as $item) {
-                $images = explode(",", $item["image_url"]);
-                $image = $images[0];
-                echo "<article>
-                <div class='imgbox'>
-                    <img src='" . $image . "'>
-                </div>
-                <a class='title' href='item.php?id=" . $item['item_id'] . "'>" . $item['title'] . "</a>
-                <p class ='small-text'>" . $item['location'] . "</p>
-                <p class ='small-text'>Published " . $item['publish_date'] . "</p>
-            </article>";
-            }
-            ?>
+        <div class="profile-left">
+            <img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>">
+            <h1><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
+            <p><?php echo htmlspecialchars($_SESSION['email']); ?></p>
+        </div>
+        <div class="profile-center">
+
+        </div>
+        <div class="profile-right">
+            
         </div>
     </main>
 </body>
