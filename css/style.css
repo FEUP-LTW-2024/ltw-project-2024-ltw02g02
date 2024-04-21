@@ -247,7 +247,10 @@ article {
     background-color: #5C5470;
     overflow: hidden;
     width: 100%;
-    height: 250px;
+    height: 150px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    box-shadow: 10px 15px 10px var(--primary-color);
 }
 
 .background {
@@ -273,18 +276,36 @@ article {
     padding: 10px;
     font-size: 48px;
     font-weight: bold;
-    border-radius: 10px;
-    border: 5px solid var(--secondary-color);
-    color: var(--primary-color);
-    background-image: linear-gradient(to bottom, var(--hyperlink-color), var(--secondary-color));
-    background-color: var(--secondary-color);
     z-index: 1;
     transition: all 0.2s ease;
+    background: -webkit-linear-gradient(white, rgb(143, 13, 143));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .category-title:hover {
-    color: var(--hyperlink-color);
-    border: 5px solid var(--primary-color);
-    background-image: var(--transparent);
+    background: -webkit-linear-gradient(#c2e9fb 51%,rgb(77, 1, 77));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
 }
 
+
+/* Page footer */
+
+footer{
+    width: 100%;
+    background-color: var(--primary-color);
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+footer .logo{
+    font-family: 'Blackout';
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-size: 45px;
+    text-decoration: none;
+}
