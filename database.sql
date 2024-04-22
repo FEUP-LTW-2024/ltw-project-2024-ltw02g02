@@ -1,5 +1,8 @@
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Items;
+DROP TABLE IF EXISTS Categories;
+
+
 
 CREATE TABLE Users (
     user_id INTEGER PRIMARY KEY,
@@ -22,6 +25,23 @@ CREATE TABLE Items (
     image_url VARCHAR,
     FOREIGN KEY (seller_id) REFERENCES Users(user_id)
 );
+
+CREATE TABLE Categories (
+    categoria_id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL UNIQUE,
+    image_url VARCHAR
+);
+
+INSERT INTO Categories (nome, image_url) VALUES 
+('Vehicles', 'images/vehicles.jpg'),
+('Clothing', 'images/cloths.jpg'),
+('Technology', 'images/tech.jpg'),
+('Sports', 'images/sports.jpg'),
+('Literature', 'images/books.jpg'),
+('Books', 'images/books_stripe.jpg'),
+('Home & Garden', 'images/home_garden_stripe.jpg'),
+('Toys & Games', 'images/toys_games_stripe.jpg'),
+('Other', 'images/other_stripe.jpg');
 
 INSERT INTO Users (username, email, password) VALUES
     ('user1', 'user1@example.com', 'password1'),
