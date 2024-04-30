@@ -8,7 +8,7 @@ CREATE TABLE Users (
     user_id INTEGER PRIMARY KEY,
     username TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
-    pfp_url TEXT DEFAULT 'images/userdefault.jpg',
+    pfp_url TEXT DEFAULT '../images/userdefault.jpg',
     password TEXT NOT NULL
 );
 

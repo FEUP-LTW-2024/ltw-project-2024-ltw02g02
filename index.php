@@ -36,16 +36,16 @@
             </div>    
             <div class="navbar-right">
                 <?php if (isset($_SESSION['username'])): ?>
-                    <li><a href="profile.php"><img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>"> Profile</a></li>
-                    <li><a href="wishlist.html">Wishlist</a></li>
+                    <li><a href="pages/profile.php"><img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>"> Profile</a></li>
+                    <li><a href="pages/wishlist.html">Wishlist</a></li>
                 <?php else: ?>
-                    <li><a href="login.html">Log In</a></li>
-                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="pages/login.html">Log In</a></li>
+                    <li><a href="pages/signup.html">Sign Up</a></li>
                 <?php endif; ?>
             </div>
         </div>
     </nav>
-    <div id="menu" class="menu">Guilherme é Gay</div>
+    <div id="menu" class="menu">Menu Test</div>
     <script src="script/script.js"></script>
     <main>
         <h1> FEATURED ITEMS </h1>
@@ -58,7 +58,7 @@
                 <div class='imgbox'>
                     <img src='" . $image . "'>
                 </div>
-                <a class='title' href='item.php?id=" . $item['item_id'] . "'>" . $item['title'] . "</a>
+                <a class='title' href='pages/item.php?id=" . $item['item_id'] . "'>" . $item['title'] . "</a>
                 <p class ='small-text'>" . $item['location'] . "</p>
                 <p class ='small-text'>Published " . $item['publish_date'] . "</p>
             </article>";

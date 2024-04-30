@@ -2,7 +2,7 @@
 session_start();
 
 function emailExists($email) {
-    $dbh = new PDO('sqlite:database.db');
+    $dbh = new PDO('sqlite:../database.db');
     $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
@@ -36,6 +36,6 @@ $_SESSION['username'] = $user['username'];
 $_SESSION['email'] = $user['email'];
 $_SESSION['pfp_url'] = $user['pfp_url'];
 
-header("Location: index.php");
+header("Location: ../index.php");
 exit;
 ?>

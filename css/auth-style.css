@@ -1,0 +1,121 @@
+@font-face {
+  font-family: 'Blackout';
+  src: url('../fonts/Blackout\ Two\ AM.ttf') format('truetype');
+}
+
+:root {
+  --primary-color: #352F44;
+  --secondary-color: #5C5470;
+  --hyperlink-color: #FAF0E6;
+  --accent-gray: #B9B4C7;
+  --transparent:  rgba(255,255,255,0)
+}
+
+/* Divisão do main com grid e configurações iniciais */
+body {
+  background-color: var(--accent-gray);
+}
+
+main {
+  display: flex;
+  position: fixed;
+  top: 50px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 50px);
+}
+
+.content-box {
+  background-color: var(--secondary-color);
+  width: 20vw;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: 5px solid var(--secondary-color);
+  background-image: linear-gradient(to bottom, var(--hyperlink-color), var(--secondary-color));;
+}
+
+h1 {
+  margin: 0;
+  color: var(--primary-color);
+  text-shadow: 0px 0px 5px var(--secondary-color);
+  font-size: 48px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.auth-form div {
+  width: 100%;
+}
+
+p {
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 2px;
+}
+
+input {
+  width: 100%;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid var(--secondary-color);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.submit-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin-top: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;;
+  font-size: 32px;
+  font-weight: bold;
+  outline: none;
+  border: 3px solid var(--secondary-color);
+  border-radius: 10px;
+  background-color: #FAF0E6;
+  color: #352F44;
+  transition: all 0.1s ease;
+  text-shadow: none;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: #e6ddd5;
+  box-shadow: 0px 0px 5px 2px var(--hyperlink-color);
+}
+
+button:active {
+  transform: scale(0.95);
+  background-color: #cdc6bf;
+}
+
+a {
+  color: var(--hyperlink-color);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.alternative p {
+  text-align: center;
+}

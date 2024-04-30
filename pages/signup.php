@@ -2,7 +2,7 @@
 
 // Verifica se o username já existe
 function userExists($username) {
-    $dbh = new PDO('sqlite:database.db');
+    $dbh = new PDO('sqlite:../database.db');
     $stmt = $dbh->prepare("SELECT * FROM Users WHERE username = :username");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
@@ -11,7 +11,7 @@ function userExists($username) {
 
 // Verifica se o email já existe
 function emailExists($email) {
-    $dbh = new PDO('sqlite:database.db');
+    $dbh = new PDO('sqlite:../database.db');
     $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
@@ -43,7 +43,7 @@ if ($_POST['password'] !== $confirm_password) {
 }
 
 // Se tudo estiver certo, podemos fazer a conexão com a base de dados
-$dbh = new PDO('sqlite:database.db');
+$dbh = new PDO('sqlite:../database.db');
 
 // Prepara a query
 $stmt = $dbh->prepare("INSERT INTO Users (username, email, password) VALUES (:username, :email, :password)");
