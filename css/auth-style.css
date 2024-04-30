@@ -65,7 +65,7 @@ p {
   margin-bottom: 2px;
 }
 
-input {
+.auth-input {
   width: 100%;
   border: none;
   outline: none;
