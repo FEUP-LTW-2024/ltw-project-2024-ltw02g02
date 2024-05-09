@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once(__DIR__ . '/php/navbar.tpl.php');
+    require_once(__DIR__ . '/php/data_fetch.php');
     $db = new PDO("sqlite:database.db");
     $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 8");
     $stmt->execute();
@@ -28,8 +29,7 @@
         <div class="featured">
             <?php
             foreach ($items as $item) {
-                $images = explode(",", $item["image_url"]);
-                $image = $images[0];
+                $image = fetchFirstImageIndex($item['item_id']);
                 echo "<article>
                 <div class='imgbox'>
                     <img src='" . $image . "'>
@@ -51,7 +51,6 @@
             }
             ?>
         </div>
-
         <footer>
             <div class="footer-content">
                 <a class="logo" href="index.php">Hand2Hand</a>

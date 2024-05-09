@@ -33,4 +33,18 @@ function fetchFirstImage($item_id) {
     return $image[0];
 }
 
+function fetchFirstImageIndex($item_id) {
+    $db = new PDO("sqlite:database.db");
+    $stmt = $db->prepare("SELECT image_url FROM Images WHERE item_id = :item_id LIMIT 1");
+    $stmt->bindParam(':item_id', $item_id);
+    $stmt->execute();
+    $image = $stmt->fetch();
+    if ($image === false) {
+        $image = '../images/no-image.png';
+        return $image;
+    }
+    $db = null;
+    return $image[0];
+}
+
 ?>

@@ -16,6 +16,7 @@
                 <?php if (isset($_SESSION['username'])): ?>
                     <li><a href="../pages/profile.php"><img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>"> Profile</a></li>
                     <li><a href="../pages/wishlist.php">Wishlist</a></li>
+                    <li><a href="../pages/selling.php">List Item</a></li>
                 <?php else: ?>
                     <li><a href="../pages/login.php">Log In</a></li>
                     <li><a href="../pages/signup.php">Sign Up</a></li>

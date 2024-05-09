@@ -57,11 +57,11 @@ $stmt->bindParam(':password', $password);
 $result = $stmt->execute();
 
 if ($result) {
-    header("Location: login.html");
+    header("Location: ../pages/login.php");
     exit;
 } else {
     $errorMessage = "Erro ao registrar!";
-    header("Location: signup.html?error=" . urlencode($errorMessage));
+    header("Location: ../pages/signup.php?error=" . urlencode($errorMessage));
     exit;
 }
 

@@ -2,6 +2,7 @@
     session_start();
     $db = new PDO("sqlite:../database.db");
     require_once(__DIR__ . '/../php/navbar.tpl.php');
+    require_once(__DIR__ . '/../php/data_fetch.php');
     $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
     $stmt->bindParam(":id",$_GET['id']);
     $stmt->execute();
@@ -10,7 +11,7 @@
     $stmt->bindParam(":id", $item["seller_id"]);
     $stmt->execute();
     $user = $stmt->fetch();
-    $images = explode(',',$item['image_url']);
+    $images = fetchAllImages($item['item_id']);
     $timestamp = strtotime($item['publish_date']);
     $currency = '€'
 ?>
@@ -33,12 +34,11 @@
                 <?php 
                 foreach ($images as $image) {
                     echo "<div class ='img-container'>
-                            <img  class='background' src='" . $image . "'>
-                            <img class='slide' src=" . $image . ">
+                            <img  class='background' src='" . $image['image_url'] . "'>
+                            <img class='slide' src=" . $image['image_url'] . ">
                         </div>";
                 };
                 ?>
-
                 <a class="prev-button" onclick="moveSlides(-1)">&#10094;</a>
                 <a class="next-button" onclick="moveSlides(1)">&#10095;</a>
             </div>
