@@ -5,10 +5,6 @@ const next = document.getElementById("next-button");
 var counter = 0;
 var nSlides = slides.length - 1;
 
-
-console.log(slides);
-console.log(nSlides);
-
 // Position All Images
 
 slides.forEach( (slide, index) => {

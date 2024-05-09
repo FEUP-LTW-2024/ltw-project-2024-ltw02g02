@@ -1,41 +1,41 @@
-<?php
+<?php 
 session_start();
-
-function emailExists($email) {
-    $dbh = new PDO('sqlite:../database.db');
-    $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-function correctPassword($user, $password) {
-    return password_verify($password, $user['password']);
-}
-
-$email = $_POST['email'];
-$password = $_POST['password'];
-
-$user = emailExists($email);
-
-if (!$user) {
-    $errorMessage = "Email não existe!";
-    header("Location: login.html?error=" . urlencode($errorMessage));
-    exit;
-}
-
-if (!correctPassword($user, $password)) {
-    $errorMessage = "Password incorreta!";
-    header("Location: login.html?error=" . urlencode($errorMessage));
-    exit;
-}
-
-// Armazenando dados do usuário na sessão
-$_SESSION['user_id'] = $user['user_id'];
-$_SESSION['username'] = $user['username'];
-$_SESSION['email'] = $user['email'];
-$_SESSION['pfp_url'] = $user['pfp_url'];
-
-header("Location: ../index.php");
-exit;
+require_once(__DIR__ . '/../php/navbar.tpl.php'); 
 ?>
+<!DOCTYPE html>
+<head>
+    <Title>Hand2Hand - Log In</Title>
+    <link rel="stylesheet" href="../css/navbar-style.css">
+    <link rel="stylesheet" href="../css/auth-style.css">
+    <link rel="stylesheet" href="../css/navbar-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <?php drawNavbar($_SESSION) ?>
+    <main>
+        <div class ="content-box">
+        <h1>Log In</h1>
+        <form class="auth-form" action="../php/action_login.php" method="post">
+            <div class="email">
+                <p>E-Mail</p>
+                <input class ="auth-input" name="email" type="email" placeholder="YourEmail@example.com" required>
+            </div>
+            <div class="password">
+                <p>Password</p>
+                <input class ="auth-input" name="password" type="password" placeholder="Password" required>
+            </div>
+            <div class="submit-box">
+                <button type="submit">Log In</button>
+            </div>
+        </form>
+        <div class="alternative">
+            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </div>
+    </div>
+    </main>
+    <script src="../script/errors.js"></script>
+</body>

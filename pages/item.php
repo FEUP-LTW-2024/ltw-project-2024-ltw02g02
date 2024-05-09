@@ -1,6 +1,7 @@
 <?php
     session_start();
     $db = new PDO("sqlite:../database.db");
+    require_once(__DIR__ . '/../php/navbar.tpl.php');
     $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
     $stmt->bindParam(":id",$_GET['id']);
     $stmt->execute();
@@ -16,7 +17,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Item Test</title>
+    <title><?php echo $item['title']; ?></title>
     <link rel="stylesheet" href="../css/item-style.css">
     <link rel="stylesheet" href="../css/navbar-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,36 +26,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-inner">
-            <div class="navbar-left">
-                <div class="menuicons">
-                    <img id="menulist" src="../icons/list.svg">
-                    <img id="menuclosed" class="dissapear" src="../icons/x.svg">
-                 </div>
-                <li><a class="logo" href="../index.php">Hand2Hand</a></li> 
-                <form class="searchbar" action="/search" method="get">
-                    <input type="text" name="q" placeholder="Search...">
-                    <i class="bi bi-search"></i>
-                </form>
-            </div>    
-            <div class="navbar-right">
-                <?php if (isset($_SESSION['username'])): ?>
-                    <li><a href="profile.php"><img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>"> Profile</a></li>
-                    <li><a href="logout.php">Logout</a></li>
-                <?php else: ?>
-                    <li><a href="login.html">Log In</a></li>
-                    <li><a href="signup.html">Sign Up</a></li>
-                <?php endif; ?>
-            </div>
-        </div>
-    </nav>
-    <div id="menu" class="menu">Menu Test</div>
-    <script src="../script/script.js"></script>
+<?php drawNavbar($_SESSION) ?>
     <main>
         <div id=container1>
             <div id="img-slider">
-
                 <?php 
                 foreach ($images as $image) {
                     echo "<div class ='img-container'>
@@ -71,7 +46,28 @@
         </div>
         <div id="container2">
             <div id="ad-header">
-                <h1 class="title"><?php echo $item['title']; ?></h1>
+                <div class="title-box">
+                    <h1 class="title"><?php echo $item['title']; ?></h1>
+
+                    <?php if (isset($_SESSION['username'])):
+                        $user_id = $_SESSION['user_id'];
+                        $item_id = $_GET['id'];
+                        $stmt = $db->prepare('SELECT * FROM Wishlist WHERE user_id = :user_id AND item_id = :item_id');
+                        $stmt->bindParam(':user_id', $user_id);
+                        $stmt->bindParam(':item_id', $item_id);
+                        $stmt->execute();
+                        $count = count($stmt->fetchAll());
+                    ?>
+                    <a onclick="wishlistAction(<?=$_SESSION['user_id']?>,<?=$item['item_id']?>)">
+                    <?php if ($count > 0) { ?>
+                        <i id="heart" class="bi bi-heart-fill"></i>
+                    <?php } else { ?>
+                        <i id="heart" class="bi bi-heart"></i>
+                    <?php } endif; ?>
+                    </a>
+                    <script src="../script/wishlist.js"></script>
+
+                </div>
                 <h2><?php echo $currency . number_format($item['price'],2,".",","); ?></h2>
                 <p class="small-text">Listed on the <?php echo date('jS M Y',$timestamp); ?></p>
             </div>

@@ -11,7 +11,6 @@
   --transparent:  rgba(255,255,255,0)
 }
 
-/* Divisão do main com grid e configurações iniciais */
 body {
   background-color: var(--accent-gray);
 }
@@ -108,11 +107,11 @@ button:active {
   background-color: #cdc6bf;
 }
 
-a {
+.alternative a {
   color: var(--hyperlink-color);
 }
 
-a:hover {
+.alternative a:hover {
   text-decoration: underline;
 }
 

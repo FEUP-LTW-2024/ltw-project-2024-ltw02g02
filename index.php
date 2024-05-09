@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once(__DIR__ . '/php/navbar.tpl.php');
     $db = new PDO("sqlite:database.db");
     $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 8");
     $stmt->execute();
@@ -21,32 +22,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-inner">
-            <div class="navbar-left">
-                <div class="menuicons">
-                    <img id="menulist" src="icons/list.svg">
-                    <img id="menuclosed" class="dissapear" src="icons/x.svg">
-                 </div>
-                <li><a class="logo" href="index.php">Hand2Hand</a></li> 
-                <form class="searchbar" action="/search" method="get">
-                    <input type="text" name="q" placeholder="Search...">
-                    <i class="bi bi-search"></i>
-                </form>
-            </div>    
-            <div class="navbar-right">
-                <?php if (isset($_SESSION['username'])): ?>
-                    <li><a href="pages/profile.php"><img id="pfp" src="<?php echo htmlspecialchars($_SESSION['pfp_url']); ?>"> Profile</a></li>
-                    <li><a href="pages/wishlist.html">Wishlist</a></li>
-                <?php else: ?>
-                    <li><a href="pages/login.html">Log In</a></li>
-                    <li><a href="pages/signup.html">Sign Up</a></li>
-                <?php endif; ?>
-            </div>
-        </div>
-    </nav>
-    <div id="menu" class="menu">Menu Test</div>
-    <script src="script/script.js"></script>
+<?php drawNavbar($_SESSION) ?>
     <main>
         <h1> FEATURED ITEMS </h1>
         <div class="featured">

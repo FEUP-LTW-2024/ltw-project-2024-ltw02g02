@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Items;
 DROP TABLE IF EXISTS Categories;
+DROP TABLE IF EXISTS Wishlist;
 
 
 
@@ -31,6 +32,26 @@ CREATE TABLE Categories (
     nome TEXT NOT NULL UNIQUE,
     image_url VARCHAR
 );
+
+CREATE TABLE Wishlist (
+    wishlist_id INTEGER PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    item_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (item_id) REFERENCES Items(item_id)
+);
+
+CREATE TABLE Images (
+    image_id INTEGER PRIMARY KEY,
+    item_id INTEGER NOT NULL,
+    image_url VARCHAR,
+    FOREIGN KEY (item_id) REFERENCES Items(item_id)
+);
+
+INSERT INTO Images (item_id, image_url) VALUES 
+(4,'https://picsum.photos/500/600'),
+(6,'https://picsum.photos/700/800'),
+(7,'https://picsum.photos/800/900');
 
 INSERT INTO Categories (nome, image_url) VALUES 
 ('Vehicles', 'images/vehicles.jpg'),

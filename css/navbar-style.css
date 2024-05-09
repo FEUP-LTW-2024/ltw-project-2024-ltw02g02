@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Blackout';
+    src: url('../fonts/Blackout\ Two\ AM.ttf') format('truetype');
+}
+  
+:root {
+    --primary-color: #352F44;
+    --secondary-color: #5C5470;
+    --hyperlink-color: #FAF0E6;
+    --accent-gray: #B9B4C7;
+    --transparent:  rgba(255,255,255,0)
+}
+
 body {
     padding-top:50px;
     font-family: Inter;
