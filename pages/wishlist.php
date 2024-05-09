@@ -18,9 +18,11 @@ require_once(__DIR__ . '/../php/data_fetch.php');
     <?php drawNavbar($_SESSION) ?>
     <main>
         <div class="wishlist-wrapper">
-        <?php if (isset($_SESSION)) { 
+        <?php if (isset($_SESSION['user_id'])) { 
             $user_id = $_SESSION['user_id'];
             $wishlist = fetchWishlist($user_id);
+            $count = count($wishlist);
+            if ($count > 0) {
             foreach ($wishlist as $item) {
                 $image = fetchFirstImage($item['item_id']);
             ?>
@@ -41,7 +43,10 @@ require_once(__DIR__ . '/../php/data_fetch.php');
                 </div>
             </article>
             <?php }} else { ?>
-                <h1>Not logged in, please log in or create an account to view your wishlist!</h1>
+                <h1>You haven't added any items to your wishlist yet!</h1>
+            <?php }
+        } else { ?>
+                <h1>Not logged in, please <a href="login.php">log in</a> or <a href="signup.php">create an account</a> to view your wishlist!</h1>
             <?php } ?>
             <script src="../script/wishlist.js"></script>
         </div>
