@@ -10,6 +10,7 @@ CREATE TABLE Users (
     user_id INTEGER PRIMARY KEY,
     username TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
+    join_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     pfp_url TEXT DEFAULT '../images/userdefault.jpg',
     password TEXT NOT NULL
 );
@@ -22,7 +23,7 @@ CREATE TABLE Items (
     price REAL,
     condition TEXT,
     category TEXT,
-    currency TEXT DEFAULT '€',
+    currency TEXT DEFAULT 'EUR',
     cellphone TEXT,
     location TEXT,
     publish_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -76,7 +77,7 @@ INSERT INTO Images (item_id, image_url) VALUES
 (6, 'https://picsum.photos/900/1000'),
 (6, 'https://picsum.photos/1100/1200'),
 (6, 'https://picsum.photos/1300/1400'),
-(7, 'https://picsum.photos/800/900'),
+(7, 'https://picsum.photos/800/800'),
 (7, 'https://picsum.photos/1000/1100'),
 (7, 'https://picsum.photos/1200/1300'),
 (7, 'https://picsum.photos/1400/1500'),
@@ -88,7 +89,7 @@ INSERT INTO Images (item_id, image_url) VALUES
 (9, 'https://picsum.photos/1200/1300'),
 (9, 'https://picsum.photos/1400/1500'),
 (9, 'https://picsum.photos/1600/1700'),
-(10, 'https://picsum.photos/1100/1200'),
+(10, 'https://picsum.photos/1200/1200'),
 (10, 'https://picsum.photos/1300/1400'),
 (10, 'https://picsum.photos/1500/1600'),
 (10, 'https://picsum.photos/1700/1800');

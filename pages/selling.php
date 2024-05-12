@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../php/data_fetch.php');
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>Item Test</title>
+    <title>Hand2Hand - List Item</title>
     <link rel="stylesheet" href="../css/selling-style.css">
     <link rel="stylesheet" href="../css/navbar-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,8 +21,8 @@ require_once(__DIR__ . '/../php/data_fetch.php');
         <h1>Publish new listing</h1>
         <form class="add-listing" action="../php/action_list_item.php" method="post" enctype="multipart/form-data">
             <div class="add-title wrapper">
-                <h2>Listing Title</h2>
-                <input type="text" name ="title" minlength="16" maxlength="70">
+                <h2>Listing Title<span class="required">*</span></h2>
+                <input class="title-text" type="text" name ="title" placeholder="Write your listing title here..." minlength="4" maxlength="70">
                 <h3>Choose a fitting category</h3>
                 <select id="category" name="category">
                     <option value="vehicles">Vehicles</option>
@@ -41,8 +41,8 @@ require_once(__DIR__ . '/../php/data_fetch.php');
                 <output id="display-images">
             </div>
             <div class="add-description wrapper">
-                <h2>Description</h2>
-                <input type="text" name="description" maxlength="1000" minlength="20" required>
+                <h2>Description<span class="required">*</span></h2>
+                <textarea class="big-text" id="description" name="description" maxlength="1000" minlength="20" placeholder="Write a fitting description for the item here..."required></textarea>
                 <h3>Choose a fitting condition</h3>
                 <select id="condition" name="condition">
                     <option value="brand-new">Brand New</option>
@@ -54,22 +54,35 @@ require_once(__DIR__ . '/../php/data_fetch.php');
             </div>
             <div class="add-details wrapper">
                 <h2>Details</h2>
-                <h3>Location</h3>
-                <input type="text" name="location" required>
+                <h3>Location<span class="required">*</span></h3>
+                <input class="small-text" type="text" name="location" placeholder="ex .: Lisbon, Portugal ..." required>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="cellphone-checkbox">
                     <label for="cellphone-number">Associate Cellphone Number to listing?</label>
                 </div>
                 <div id="cellphone-wrapper" class="cellphone-wrapper">
                     <h3>Cellphone Number</h3>
-                    <input type="text" id="cellphone-number" name="cellphone-number">
+                    <input class="small-text" type="text" id="cellphone-number" name="cellphone-number">
                 </div>
             </div>
             <div class="submit wrapper">
-                <input type="number" id="price" name="price" required>
-                <input type="submit">
+                <div class="price-wrapper">
+                    <h2>Listing Price<span class="required">*</span>:</h2>
+                    <input class="small-text" type="number" id="price" name="price" step="0.01" required>
+                    <select id="currency" name="currency">
+                        <option value="EUR">€ (EUR)</option>
+                        <option value="USD">$ (USD)</option>
+                        <option value="AUD">AU$ (AUD)</option>
+                        <option value="CAD">CA$ (CAD)</option>
+                        <option value="GBP">£ (GBP)</option>
+                        <option value="YEN">¥ (YEN)</option>
+                        <option value="BRL">R$ (BRL)</option>
+                    </select>
+                </div>
+                <input class="submit-button" type="submit">
             </div>
         </form>
+        <p class="required-warning">Fields marked with <span class="required">*</span> are required.</p>
         <script src="../script/listing.js"></script>
         <script src="../script/errors.js"></script>
     </main>

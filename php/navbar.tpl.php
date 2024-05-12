@@ -24,6 +24,18 @@
             </div>
         </div>
     </nav>
-    <div id="menu" class="menu">Menu Test</div>
+    <div id="menu" class="menu">
+        <div class="menu-items">
+            <div class="menu-item">
+                <a href="">View My Listings</a>
+            </div>
+            <div class="menu-item">
+                <a href="">Mensagens</a>
+            </div>
+        </div>
+        <div class="logout-wrapper">
+            <a href="">Log Out</a>
+        </div>
+    </div>
     <script src="../script/menu.js"></script>
 <?php } ?>

@@ -47,4 +47,50 @@ function fetchFirstImageIndex($item_id) {
     return $image[0];
 }
 
+function fetchItem($item_id) {
+    $db = new PDO("sqlite:../database.db");
+    $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
+    $stmt->bindParam(":id",$item_id);
+    $stmt->execute();
+    $item = $stmt->fetch();
+    $db = null;
+    return $item;
+}
+
+function fetchSeller($seller_id) {
+    $db = new PDO("sqlite:../database.db");
+    $stmt = $db->prepare("SELECT * FROM Users WHERE user_id = :id");
+    $stmt->bindParam(":id",$seller_id);
+    $stmt->execute();
+    $seller = $stmt->fetch();
+    $db = null;
+    return $seller;
+}
+
+function formatPrice($price,$currency) {
+    switch ($currency) {
+        case 'EUR':
+            $formattedPrice = $price . ' €';
+            break;
+        case 'USD':
+            $formattedPrice = '$ ' . $price;
+            break;
+        case 'AUD':
+            $formattedPrice = 'AU$ ' . $price;
+            break;
+        case 'CAD':
+            $formattedPrice = 'CA$ ' . $price;
+            break;
+        case 'GBP':
+            $formattedPrice = '£ ' . $price;
+            break;
+        case 'YEN':
+            $formattedPrice = $price . ' ¥' ;
+            break;
+        case 'BRL':
+            $formattedPrice = 'R$ ' . $price;
+            break;
+    }
+    return $formattedPrice;
+}
 ?>

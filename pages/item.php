@@ -3,17 +3,11 @@
     $db = new PDO("sqlite:../database.db");
     require_once(__DIR__ . '/../php/navbar.tpl.php');
     require_once(__DIR__ . '/../php/data_fetch.php');
-    $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
-    $stmt->bindParam(":id",$_GET['id']);
-    $stmt->execute();
-    $item = $stmt->fetch();
-    $stmt = $db->prepare("SELECT * FROM Users WHERE user_id = :id");
-    $stmt->bindParam(":id", $item["seller_id"]);
-    $stmt->execute();
-    $user = $stmt->fetch();
+    $item = fetchItem($_GET['id']);
+    $seller = fetchSeller($item['seller_id']);
     $images = fetchAllImages($item['item_id']);
     $timestamp = strtotime($item['publish_date']);
-    $currency = '€'
+    $formattedPrice = formatPrice($item['price'],$item['currency']);
 ?>
 <!DOCTYPE html>
 <head>
@@ -68,7 +62,7 @@
                     <script src="../script/wishlist.js"></script>
 
                 </div>
-                <h2><?php echo $currency . number_format($item['price'],2,".",","); ?></h2>
+                <h2><?php echo $formattedPrice; ?></h2>
                 <p class="small-text">Listed on the <?php echo date('jS M Y',$timestamp); ?></p>
             </div>
             <div id="description-box"> 
@@ -81,10 +75,10 @@
             <div id="seller">
                 <h2>Seller Information</h2>
                 <div class="user-box">
-                    <img id="profile-picture" src="<?php echo $user['pfp_url']; ?>">
-                    <a id="seller-name" href="user.html"><?php echo $user['username']; ?></p>
+                    <img id="profile-picture" src="<?php echo $seller['pfp_url']; ?>">
+                    <a id="seller-name" href="user.html"><?php echo $seller['username']; ?></a></p>
                 </div>
-                <p class="small-text">Joined 2001</p>
+                <p class="small-text">Joined <?php echo date('Y',strtotime($seller['join_date'])) ?></p>
             </div>
         </div>
     </main>
