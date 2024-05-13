@@ -34,7 +34,8 @@ CREATE TABLE Items (
 CREATE TABLE Categories (
     categoria_id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL UNIQUE,
-    image_url VARCHAR
+    image_url VARCHAR,
+    icon_url VARCHAR
 );
 
 CREATE TABLE Wishlist (
@@ -94,16 +95,16 @@ INSERT INTO Images (item_id, image_url) VALUES
 (10, 'https://picsum.photos/1500/1600'),
 (10, 'https://picsum.photos/1700/1800');
 
-INSERT INTO Categories (nome, image_url) VALUES 
-('Vehicles', 'images/vehicles.jpg'),
-('Clothing', 'images/cloths.jpg'),
-('Technology', 'images/tech.jpg'),
-('Sports', 'images/sports.jpg'),
-('Literature', 'images/books.jpg'),
-('Books', 'images/books_stripe.jpg'),
-('Home & Garden', 'images/home_garden_stripe.jpg'),
-('Toys & Games', 'images/toys_games_stripe.jpg'),
-('Other', 'images/other_stripe.jpg');
+INSERT INTO Categories (nome, image_url, icon_url) VALUES 
+('Vehicles', 'images/vehicles.jpg', 'images/vehicleicon.png'),
+('Clothing', 'images/cloths.jpg', 'images/clothsicon.png'),
+('Technology', 'images/tech.jpg', 'images/techicon.png'),
+('Sports', 'images/sports.jpg', 'images/sporticon.png'),
+('Literature', 'images/books.jpg', 'images/literatureicon.png'), 
+('Books', 'images/books_stripe.jpg', 'images/booksicon.png'),
+('Home & Garden', 'images/home_garden_stripe.jpg', 'images/garden.png'),
+('Toys & Games', 'images/toys_games_stripe.jpg' , 'images/toysicon.png'),
+('Other', 'images/other_stripe.jpg', 'images/othericon.png');
 
 INSERT INTO Users (username, email, password) VALUES
     ('user1', 'user1@example.com', 'password1'),

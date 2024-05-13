@@ -40,7 +40,7 @@
             </article>";
             } ?>
             </div>
-            <h1>Categories</h1>
+            <a href="pages/categories.php"><h1>Categories</h1></a> 
             <div class="categories">
             <?php
             foreach ($categories as $category) {
