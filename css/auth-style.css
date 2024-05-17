@@ -80,7 +80,7 @@ p {
   justify-content: center;
 }
 
-button {
+.submit-box button {
   margin-top: 20px;
   padding: 5px;
   padding-left: 10px;
@@ -96,13 +96,13 @@ button {
   text-shadow: none;
 }
 
-button:hover {
+.submit-box button:hover {
   transform: scale(1.05);
   background-color: #e6ddd5;
   box-shadow: 0px 0px 5px 2px var(--hyperlink-color);
 }
 
-button:active {
+.submit-box button:active {
   transform: scale(0.95);
   background-color: #cdc6bf;
 }

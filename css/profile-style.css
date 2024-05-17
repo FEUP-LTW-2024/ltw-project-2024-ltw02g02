@@ -40,10 +40,36 @@ main {
     border-right: 1px solid var(--accent-gray);
 }
 
-.profile-left img#pfp {
-    height: 200px;
+.pfp-wrapper {
+    position: relative;
     width: 200px;
-    border-radius: 50%;
+    height: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.pfp-wrapper img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 999px;
+}
+
+.edit {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 body > main > div.profile-left > p {

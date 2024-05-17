@@ -23,20 +23,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php drawNavbar($_SESSION) ?>
+<?php drawNavbar($db); ?>
     <main>
         <h1> FEATURED ITEMS </h1>
         <div class="featured">
             <?php
             foreach ($items as $item) {
-                $image = fetchFirstImageIndex($item['item_id']);
+                $image = fetchFirstImageIndex($db, $item['item_id']);
                 echo "<article>
                 <div class='imgbox'>
-                    <img src='" . $image . "'>
+                    <img src='" . htmlspecialchars($image) . "'>
                 </div>
-                <a class='title' href='pages/item.php?id=" . $item['item_id'] . "'>" . $item['title'] . "</a>
-                <p class ='small-text'>" . $item['location'] . "</p>
-                <p class ='small-text'>Published " . $item['publish_date'] . "</p>
+                <a class='title' href='pages/item.php?id=" . htmlspecialchars($item['item_id']) . "'>" . htmlspecialchars($item['title']) . "</a>
+                <p class ='small-text'>" . htmlspecialchars($item['location']) . "</p>
+                <p class ='small-text'>Published " . htmlspecialchars($item['publish_date']) . "</p>
             </article>";
             } ?>
             </div>
@@ -45,8 +45,8 @@
             <?php
             foreach ($categories as $category) {
                 echo "<div class='category'>
-                        <img class='background' src='" . $category['image_url'] . "'>
-                        <a href='search.php?category=" . $category['categoria_id'] . "' class='category-title'>" . $category['nome'] . "</a>
+                        <img class='background' src='" . htmlspecialchars($category['image_url']) . "'>
+                        <a href='search.php?category=" . htmlspecialchars($category['categoria_id']) . "' class='category-title'>" . htmlspecialchars($category['nome']) . "</a>
                     </div>";
             }
             ?>

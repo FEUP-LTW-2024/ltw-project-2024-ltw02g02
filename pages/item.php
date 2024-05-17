@@ -3,16 +3,19 @@
     $db = new PDO("sqlite:../database.db");
     require_once(__DIR__ . '/../php/navbar.tpl.php');
     require_once(__DIR__ . '/../php/data_fetch.php');
-    $item = fetchItem($_GET['id']);
-    $seller = fetchSeller($item['seller_id']);
-    $images = fetchAllImages($item['item_id']);
+    if (!isset($_GET['id'])) {
+        header('Location: not_found.php');
+    }
+    $item = fetchItem($db, $_GET['id']);
+    $seller = fetchSeller($db, $item['seller_id']);
+    $images = fetchAllImages($db, $item['item_id']);
     $timestamp = strtotime($item['publish_date']);
     $formattedPrice = formatPrice($item['price'],$item['currency']);
 ?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title><?php echo $item['title']; ?></title>
+    <title><?php echo htmlspecialchars($item['title']); ?></title>
     <link rel="stylesheet" href="../css/item-style.css">
     <link rel="stylesheet" href="../css/navbar-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,15 +24,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php drawNavbar($_SESSION) ?>
+<?php drawNavbar($db) ?>
     <main>
         <div id=container1>
             <div id="img-slider">
                 <?php 
                 foreach ($images as $image) {
                     echo "<div class ='img-container'>
-                            <img  class='background' src='" . $image['image_url'] . "'>
-                            <img class='slide' src=" . $image['image_url'] . ">
+                            <img  class='background' src='" . htmlspecialchars($image['image_url']) . "'>
+                            <img class='slide' src=" . htmlspecialchars($image['image_url']) . ">
                         </div>";
                 };
                 ?>
@@ -41,19 +44,13 @@
         <div id="container2">
             <div id="ad-header">
                 <div class="title-box">
-                    <h1 class="title"><?php echo $item['title']; ?></h1>
+                    <h1 class="title"><?php echo htmlspecialchars($item['title']); ?></h1>
 
                     <?php if (isset($_SESSION['username'])):
-                        $user_id = $_SESSION['user_id'];
-                        $item_id = $_GET['id'];
-                        $stmt = $db->prepare('SELECT * FROM Wishlist WHERE user_id = :user_id AND item_id = :item_id');
-                        $stmt->bindParam(':user_id', $user_id);
-                        $stmt->bindParam(':item_id', $item_id);
-                        $stmt->execute();
-                        $count = count($stmt->fetchAll());
+                        $check = wishlistCheck($db, $_SESSION['user_id'], $item['item_id']);
                     ?>
                     <a onclick="wishlistAction(<?=$_SESSION['user_id']?>,<?=$item['item_id']?>)">
-                    <?php if ($count > 0) { ?>
+                    <?php if ($check) { ?>
                         <i id="heart" class="bi bi-heart-fill"></i>
                     <?php } else { ?>
                         <i id="heart" class="bi bi-heart"></i>
@@ -62,23 +59,23 @@
                     <script src="../script/wishlist.js"></script>
 
                 </div>
-                <h2><?php echo $formattedPrice; ?></h2>
-                <p class="small-text">Listed on the <?php echo date('jS M Y',$timestamp); ?></p>
+                <h2><?php echo htmlspecialchars($formattedPrice); ?></h2>
+                <p class="small-text">Listed on the <?php echo date('jS M Y',htmlspecialchars($timestamp)); ?></p>
             </div>
             <div id="description-box"> 
                 <h2>Seller's description</h2>
                 <div id="description-scroll">
-                        <p class="description"><?php echo $item['description']; ?></p>
+                        <p class="description"><?php echo htmlspecialchars($item['description']); ?></p>
                 </div>
-                <p class="location"><?php echo $item['location']; ?></p>
+                <p class="location"><?php echo htmlspecialchars($item['location']); ?></p>
             </div>
             <div id="seller">
                 <h2>Seller Information</h2>
                 <div class="user-box">
-                    <img id="profile-picture" src="<?php echo $seller['pfp_url']; ?>">
-                    <a id="seller-name" href="user.html"><?php echo $seller['username']; ?></a></p>
+                    <img id="profile-picture" src="<?php echo htmlspecialchars(fetchPFP($db, $seller['user_id'])); ?>">
+                    <a id="seller-name" href="profile.php?user=<?=htmlspecialchars($seller['user_id'])?>"><?php echo htmlspecialchars($seller['username']); ?></a></p>
                 </div>
-                <p class="small-text">Joined <?php echo date('Y',strtotime($seller['join_date'])) ?></p>
+                <p class="small-text">Joined <?php echo date('Y',strtotime(htmlspecialchars($seller['join_date']))) ?></p>
             </div>
         </div>
     </main>

@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$db = new PDO ('sqlite: ../database.db');
 require_once(__DIR__ . '/../php/navbar.tpl.php'); 
 ?>
 <!DOCTYPE html>
@@ -16,7 +17,7 @@ require_once(__DIR__ . '/../php/navbar.tpl.php');
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php drawNavbar($_SESSION) ?>
+    <?php drawNavbar($db) ?>
     <main>
         <div class = "content-box">
             <h1>Sign Up</h1>

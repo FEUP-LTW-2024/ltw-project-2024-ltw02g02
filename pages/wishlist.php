@@ -1,7 +1,8 @@
 <?php 
 session_start();
+$db = new PDO("sqlite:../database.db");
 require_once(__DIR__ . '/../php/navbar.tpl.php'); 
-require_once(__DIR__ . '/../php/data_fetch.php'); 
+require_once(__DIR__ . '/../php/data_fetch.php');
 ?>
 <!DOCTYPE html>
 <head>
@@ -15,16 +16,16 @@ require_once(__DIR__ . '/../php/data_fetch.php');
 
 </head>
 <body>
-    <?php drawNavbar($_SESSION) ?>
+    <?php drawNavbar($db) ?>
     <main>
         <div class="wishlist-wrapper">
         <?php if (isset($_SESSION['user_id'])) { 
             $user_id = $_SESSION['user_id'];
-            $wishlist = fetchWishlist($user_id);
+            $wishlist = fetchWishlist($db, $user_id);
             $count = count($wishlist);
             if ($count > 0) {
             foreach ($wishlist as $item) {
-                $image = fetchFirstImage($item['item_id']);
+                $image = fetchFirstImage($db, $item['item_id']);
             ?>
             <article class ="wishlist-item" id="<?php echo $item['item_id']?>">
                 <div class="image-wrapper">
@@ -38,7 +39,7 @@ require_once(__DIR__ . '/../php/data_fetch.php');
                     </div>
                 </div>
                 <div class="article-right">
-                    <p class="price"><?php echo $item['price']?> €</p>
+                    <p class="price"><?php formatPrice($item['price'],$item['currency'])?></p>
                     <a onclick="removeFromWishlist(<?=$_SESSION['user_id']?>,<?=$item['item_id']?>)"><i class="bi bi-trash"></i></a>
                 </div>
             </article>

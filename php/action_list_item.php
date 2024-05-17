@@ -36,7 +36,7 @@ if (isset($_POST['title'])) {
         $files_array = array_combine($tmp_names,$file_names);
 
         foreach ($files_array as $tmp_name => $file_name) {
-            $file_extension = strtolower(end(explode('.', $file_name)));
+            $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
             $new_file_name = uniqid() . 'U' . $seller_id . 'I' . $item_id . '.' . $file_extension;
             $new_file_path = $folder . $new_file_name;
             move_uploaded_file($tmp_name, $new_file_path);

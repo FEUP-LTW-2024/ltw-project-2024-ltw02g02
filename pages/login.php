@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$db = new PDO('sqlite: ../database.db');
 require_once(__DIR__ . '/../php/navbar.tpl.php'); 
 ?>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@ require_once(__DIR__ . '/../php/navbar.tpl.php');
 
 </head>
 <body>
-    <?php drawNavbar($_SESSION) ?>
+    <?php drawNavbar($db) ?>
     <main>
         <div class ="content-box">
         <h1>Log In</h1>

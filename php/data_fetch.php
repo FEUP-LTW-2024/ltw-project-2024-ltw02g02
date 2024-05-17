@@ -1,26 +1,21 @@
 <?php 
-function fetchWishlist($user_id) {
-    $db = new PDO("sqlite:../database.db");
+function fetchWishlist(PDO $db, $user_id) {
     $stmt = $db->prepare("SELECT Items.* FROM Wishlist JOIN Items ON Wishlist.item_id = Items.item_id WHERE Wishlist.user_id = :user_id");
     $stmt->bindParam(':user_id', $user_id);
     $stmt->execute();
     $wishlist = $stmt->fetchAll();
-    $db = null;
     return $wishlist;
 }
 
-function fetchAllImages($item_id) {
-    $db = new PDO("sqlite:../database.db");
+function fetchAllImages(PDO $db, $item_id) {
     $stmt = $db->prepare("SELECT image_url FROM Images WHERE item_id = :item_id");
     $stmt->bindParam(':item_id', $item_id);
     $stmt->execute();
     $images = $stmt->fetchAll();
-    $db = null;
     return $images;
 }
 
-function fetchFirstImage($item_id) {
-    $db = new PDO("sqlite:../database.db");
+function fetchFirstImage(PDO $db, $item_id) {
     $stmt = $db->prepare("SELECT image_url FROM Images WHERE item_id = :item_id LIMIT 1");
     $stmt->bindParam(':item_id', $item_id);
     $stmt->execute();
@@ -29,12 +24,10 @@ function fetchFirstImage($item_id) {
         $image = '../images/no-image.png';
         return $image;
     }
-    $db = null;
     return $image[0];
 }
 
-function fetchFirstImageIndex($item_id) {
-    $db = new PDO("sqlite:database.db");
+function fetchFirstImageIndex(PDO $db, $item_id) {
     $stmt = $db->prepare("SELECT image_url FROM Images WHERE item_id = :item_id LIMIT 1");
     $stmt->bindParam(':item_id', $item_id);
     $stmt->execute();
@@ -43,28 +36,34 @@ function fetchFirstImageIndex($item_id) {
         $image = '../images/no-image.png';
         return $image;
     }
-    $db = null;
     return $image[0];
 }
 
-function fetchItem($item_id) {
-    $db = new PDO("sqlite:../database.db");
+function fetchItem(PDO $db, $item_id) {
     $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
     $stmt->bindParam(":id",$item_id);
     $stmt->execute();
     $item = $stmt->fetch();
-    $db = null;
     return $item;
 }
 
-function fetchSeller($seller_id) {
-    $db = new PDO("sqlite:../database.db");
+function fetchSeller(PDO $db, $seller_id) {
     $stmt = $db->prepare("SELECT * FROM Users WHERE user_id = :id");
     $stmt->bindParam(":id",$seller_id);
     $stmt->execute();
     $seller = $stmt->fetch();
-    $db = null;
     return $seller;
+}
+
+function fetchPFP(PDO $db, $user_id) {
+    $stmt = $db->prepare("SELECT pfp_url FROM Users WHERE user_id = :id");
+    $stmt->bindParam(":id",$user_id);
+    $stmt->execute();
+    $pfp_url = $stmt->fetchColumn();
+    if (!file_exists($pfp_url)) {
+        $pfp_url = '../images/userdefault.jpg';
+    }
+    return $pfp_url;
 }
 
 function formatPrice($price,$currency) {
@@ -93,4 +92,34 @@ function formatPrice($price,$currency) {
     }
     return $formattedPrice;
 }
+
+function wishlistCheck(PDO $db, $user_id, $item_id) {
+    $stmt = $db->prepare('SELECT * FROM Wishlist WHERE user_id = :user_id AND item_id = :item_id');
+    $stmt->bindParam(':user_id', $user_id);
+    $stmt->bindParam(':item_id', $item_id);
+    $stmt->execute();
+    $count = count($stmt->fetchAll());
+    if ($count > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function userExists($username) {
+    $dbh = new PDO('sqlite:../database.db');
+    $stmt = $dbh->prepare("SELECT * FROM Users WHERE username = :username");
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
+    return $stmt->fetch() !== false;
+}
+
+function emailExists($email) {
+    $dbh = new PDO('sqlite:../database.db');
+    $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    return $stmt->fetch() !== false;
+}
+
 ?>

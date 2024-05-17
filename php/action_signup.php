@@ -1,22 +1,7 @@
 <?php
 
-// Verifica se o username já existe
-function userExists($username) {
-    $dbh = new PDO('sqlite:../database.db');
-    $stmt = $dbh->prepare("SELECT * FROM Users WHERE username = :username");
-    $stmt->bindParam(':username', $username);
-    $stmt->execute();
-    return $stmt->fetch() !== false;
-}
-
-// Verifica se o email já existe
-function emailExists($email) {
-    $dbh = new PDO('sqlite:../database.db');
-    $stmt = $dbh->prepare("SELECT * FROM Users WHERE email = :email");
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-    return $stmt->fetch() !== false;
-}
+$dbh = new PDO('sqlite:../database.db');
+require_once(__DIR__ . '/data_fetch.php');
 
 // Atribuir valores aos parâmetros
 $username = $_POST['username'];
@@ -25,19 +10,19 @@ $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $confirm_password = $_POST['confirm_password'];
 
 if (userExists($username)) {
-    $errorMessage = "Usuário já existe!";
+    $errorMessage = "Username already in use!";
     header("Location: signup.html?error=" . urlencode($errorMessage));
     exit;
 }
 
 if (emailExists($email)) {
-    $errorMessage = "Email já existe!";
+    $errorMessage = "E-Mail already in use!";
     header("Location: signup.html?error=" . urlencode($errorMessage));
     exit;
 }
 
 if ($_POST['password'] !== $confirm_password) {
-    $errorMessage = "As passwords não coincidem!";
+    $errorMessage = "Passwords do not match!";
     header("Location: signup.html?error=" . urlencode($errorMessage));
     exit;
 }
@@ -60,7 +45,7 @@ if ($result) {
     header("Location: ../pages/login.php");
     exit;
 } else {
-    $errorMessage = "Erro ao registrar!";
+    $errorMessage = "Error signing up!";
     header("Location: ../pages/signup.php?error=" . urlencode($errorMessage));
     exit;
 }

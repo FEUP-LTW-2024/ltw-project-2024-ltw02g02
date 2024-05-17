@@ -1,5 +1,6 @@
 <?php
 session_start();
+$db = new PDO("sqlite:../database.db");
 require_once(__DIR__ . '/../php/navbar.tpl.php'); 
 require_once(__DIR__ . '/../php/data_fetch.php'); 
 ?>
@@ -16,7 +17,7 @@ require_once(__DIR__ . '/../php/data_fetch.php');
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php drawNavbar($_SESSION) ?>
+    <?php drawNavbar($db); ?>
     <main>
         <h1>Publish new listing</h1>
         <form class="add-listing" action="../php/action_list_item.php" method="post" enctype="multipart/form-data">
@@ -79,7 +80,7 @@ require_once(__DIR__ . '/../php/data_fetch.php');
                         <option value="BRL">R$ (BRL)</option>
                     </select>
                 </div>
-                <input class="submit-button" type="submit">
+                <input class="submit-button" type="submit" value="List Item">
             </div>
         </form>
         <p class="required-warning">Fields marked with <span class="required">*</span> are required.</p>
