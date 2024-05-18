@@ -11,19 +11,19 @@ $confirm_password = $_POST['confirm_password'];
 
 if (userExists($username)) {
     $errorMessage = "Username already in use!";
-    header("Location: signup.html?error=" . urlencode($errorMessage));
+    header("Location: ./pages/signup.php?error=" . urlencode($errorMessage));
     exit;
 }
 
 if (emailExists($email)) {
     $errorMessage = "E-Mail already in use!";
-    header("Location: signup.html?error=" . urlencode($errorMessage));
+    header("Location: ./pages/signup.php?error=" . urlencode($errorMessage));
     exit;
 }
 
 if ($_POST['password'] !== $confirm_password) {
     $errorMessage = "Passwords do not match!";
-    header("Location: signup.html?error=" . urlencode($errorMessage));
+    header("Location: ./pages/signup.php?error=" . urlencode($errorMessage));
     exit;
 }
 

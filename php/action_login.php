@@ -19,14 +19,14 @@ $password = $_POST['password'];
 $user = emailExists($email);
 
 if (!$user) {
-    $errorMessage = "Email não existe!";
-    header("Location: login.html?error=" . urlencode($errorMessage));
+    $errorMessage = "Email or password is incorrect!";
+    header("Location: ../pages/login.php?error=" . urlencode($errorMessage));
     exit;
 }
 
 if (!correctPassword($user, $password)) {
-    $errorMessage = "Password incorreta!";
-    header("Location: login.html?error=" . urlencode($errorMessage));
+    $errorMessage = "Email or password is incorrect!";
+    header("Location: ../pages/login.php?error=" . urlencode($errorMessage));
     exit;
 }
 

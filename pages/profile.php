@@ -6,6 +6,7 @@
     if (!isset($_GET['user'])) {
         header('Location: not_found.php');
     }
+    $listings = fetchListings($db, $_GET['user']);
 ?>
 
 <!DOCTYPE html>
@@ -22,37 +23,73 @@
 <body>
     <?php drawNavbar($db) ?>
     <main>
-        <?php if (isset($_SESSION['user_id']) and ($_SESSION['user_id'] == $_GET['user'])) { ?>
+        <div class="profile-wrapper">
+            <?php if (isset($_SESSION['user_id']) and ($_SESSION['user_id'] == $_GET['user'])) { ?>
+                <div class="profile-left">
+                    <div class="pfp-wrapper">
+                        <img src="<?=htmlspecialchars(fetchPFP($db, $_SESSION['user_id']))?>">
+                        <a class="edit" href="edit.php"><i class="bi bi-pencil-square"></i></a>
+                    </div>
+                    <h1><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
+                    <p><?php echo htmlspecialchars($_SESSION['email']); ?></p>
+                    <a href="../php/logout.php">Logout</a>
+                </div>
+            <div class="profile-right">
+                <?php if (count($listings) > 0) { ?>
+                <h2>Your Listings</h2>
+                <div class="listings">
+                    <?php foreach ($listings as $listing) { ?>
+                        <article class="listing">
+                            <img src="<?=htmlspecialchars(fetchFirstImage($db, $listing['item_id']))?>">
+                            <div class="listing-text">
+                                <a href="item.php?id=<?=htmlspecialchars($listing['item_id'])?>"><?=htmlspecialchars($listing['title'])?></a>
+                                <p><?=date('jS M Y',htmlspecialchars(strtotime($listing['publish_date'])))?></p>
+                            </div> 
+                            <form id="editForm" action="../pages/edit_listing.php" method="post">
+                                <input type="hidden" name="item_id" value="<?=htmlspecialchars($listing['item_id'])?>">
+                                <button type="submit"><i class="bi bi-pencil-square"></i></button>
+                            </form>
+                            <form id="deleteForm" action="../php/action_delete_item.php" method="post" onsubmit="return confirmDeletion(event);">
+                                <input type="hidden" name="item_id" value="<?=htmlspecialchars($listing['item_id'])?>">
+                                <button type="submit"><i class="bi bi-trash"></i></button>
+                            </form>
+                        </article>
+                    <?php } ?>
+                    <script src="../script/delete.js"></script>
+                </div>
+                <?php } else { ?>
+                    <h2>You have no public listings up</h2>
+                <?php } ?>
+            </div>
+                <?php 
+            } else { $user = fetchSeller($db, $_GET['user'])?>
             <div class="profile-left">
                 <div class="pfp-wrapper">
-                    <img src="<?=htmlspecialchars(fetchPFP($db, $_SESSION['user_id']))?>">
-                    <a class="edit" href="edit.php"><i class="bi bi-pencil-square"></i></a>
+                    <img src="<?=htmlspecialchars(fetchPFP($db, $user['user_id']))?>">
                 </div>
-                <h1><?php echo htmlspecialchars($_SESSION['username']); ?></h1>
-                <p><?php echo htmlspecialchars($_SESSION['email']); ?></p>
-                <a href="../php/logout.php">Logout</a>
+                <h1><?php echo htmlspecialchars($user['username']); ?></h1>
+                <p><?php echo htmlspecialchars($user['email']); ?></p>
             </div>
-        <div class="profile-center">
-
-        </div>
-        <div class="profile-right"></div>
-
-        </div>
-            <?php 
-        } else { $user = fetchSeller($db, $_GET['user'])?>
-        <div class="profile-left">
-            <div class="pfp-wrapper">
-                <img src="<?=htmlspecialchars(fetchPFP($db, $user['user_id']))?>">
+            <div class="profile-right">
+            <?php if (count($listings) > 0) { ?>
+                <h2>Public Listings</h2>
+                <div class="listings">
+                    <?php foreach ($listings as $listing) { ?>
+                        <article class="listing">
+                            <img src="<?=htmlspecialchars(fetchFirstImage($db, $listing['item_id']))?>">
+                            <div class="listing-text">
+                                <a href="item.php?id=<?=htmlspecialchars($listing['item_id'])?>"><?=htmlspecialchars($listing['title'])?></a>
+                                <p><?=date('jS M Y',htmlspecialchars(strtotime($listing['publish_date'])))?></p>
+                            </div>
+                        </article>
+                    <?php } ?>
+                </div>
+                <?php } else { ?>
+                    <h2>No public listings available</h2>
+                <?php } ?>
             </div>
-            <h1><?php echo htmlspecialchars($user['username']); ?></h1>
-            <p><?php echo htmlspecialchars($user['email']); ?></p>
+            <?php } ?>
         </div>
-        <div class="profile-center">
-
-        </div>
-        <div class="profile-right">
-            
-        </div>
-        <?php } ?>
     </main>
+    <script src="../script/errors.js"></script>
 </body>

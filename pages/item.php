@@ -7,6 +7,9 @@
         header('Location: not_found.php');
     }
     $item = fetchItem($db, $_GET['id']);
+    if (!$item) {
+        header('Location: not_found.php');
+    }
     $seller = fetchSeller($db, $item['seller_id']);
     $images = fetchAllImages($db, $item['item_id']);
     $timestamp = strtotime($item['publish_date']);

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$db = new PDO('sqlite: ../database.db');
+$db = new PDO("sqlite:../database.db");
 require_once(__DIR__ . '/../php/navbar.tpl.php'); 
 ?>
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ require_once(__DIR__ . '/../php/navbar.tpl.php');
             </div>
         </form>
         <div class="alternative">
-            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+            <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
         </div>
     </div>
     </main>

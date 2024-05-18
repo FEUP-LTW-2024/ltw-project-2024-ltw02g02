@@ -13,7 +13,7 @@ if (isset($_POST['title'])) {
     $currency = $_POST['currency'];
     $location = $_POST['location'];
     $cellphone = $_POST['cellphone-number'];
-    $price = number_format((float)$_POST['price'], 2, '.', '');
+    $price = $_POST['price'];
     $stmt = $db->prepare('INSERT INTO Items (seller_id, title, description, price, condition, category, currency, location, cellphone) VALUES (:seller_id,:title,:description,:price,:condition,:category,:currency,:location,:cellphone)');
     $stmt->bindParam(":seller_id", $seller_id);
     $stmt->bindParam(":title", $title);
@@ -26,7 +26,7 @@ if (isset($_POST['title'])) {
     $stmt->bindParam(":price", $price);
     $result1 = $stmt->execute();
 
-    if (isset($_FILES['images'])) {
+    if (!empty($_FILES['images']['name'][0])) {
         $item_id = $db->lastInsertId();
         
         $folder = '../images/item-images/';
@@ -50,16 +50,19 @@ if (isset($_POST['title'])) {
         if (!$result2) {
             $errorMessage = "Error adding images!";
             header("Location: ../pages/selling.php?error=" . urlencode($errorMessage));
+            exit;
         }
     }
     
     if ($result1) {
         header("Location: ../index.php");
+        exit;
     } else {
         $errorMessage = "Error listing item!";
         header("Location: ../pages/selling.php?error=" . urlencode($errorMessage));
+        exit;
     }
 }
 
-$db = null;
-?>
+header("Location: ../index.php");
+exit;

@@ -3,6 +3,7 @@
     require_once(__DIR__ . '/php/navbar.tpl.php');
     require_once(__DIR__ . '/php/data_fetch.php');
     $db = new PDO("sqlite:database.db");
+    $db->exec('PRAGMA foreign_keys = ON;');
     $stmt = $db->prepare("SELECT * FROM Items ORDER BY RANDOM() LIMIT 8");
     $stmt->execute();
     $items = $stmt->fetchAll();

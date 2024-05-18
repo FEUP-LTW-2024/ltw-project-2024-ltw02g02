@@ -12,6 +12,9 @@ function fetchAllImages(PDO $db, $item_id) {
     $stmt->bindParam(':item_id', $item_id);
     $stmt->execute();
     $images = $stmt->fetchAll();
+    if (count($images) < 1) {
+        $images[]['image_url'] = '../images/no-image.png';
+    }
     return $images;
 }
 
@@ -60,13 +63,22 @@ function fetchPFP(PDO $db, $user_id) {
     $stmt->bindParam(":id",$user_id);
     $stmt->execute();
     $pfp_url = $stmt->fetchColumn();
-    if (!file_exists($pfp_url)) {
+    if (!$pfp_url || !file_exists($pfp_url)) {
         $pfp_url = '../images/userdefault.jpg';
     }
     return $pfp_url;
 }
 
+function fetchListings(PDO $db, $user_id) {
+    $stmt = $db->prepare("SELECT item_id,title,publish_date FROM Items WHERE seller_id = :id");
+    $stmt->bindParam(":id",$user_id);
+    $stmt->execute();
+    $listings = $stmt->fetchAll();
+    return $listings;
+}
+
 function formatPrice($price,$currency) {
+    $price = number_format($price,2,".","");
     switch ($currency) {
         case 'EUR':
             $formattedPrice = $price . ' €';

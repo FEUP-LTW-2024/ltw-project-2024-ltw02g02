@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../php/navbar.tpl.php');
 require_once(__DIR__ . '/../php/data_fetch.php');
 require_once(__DIR__ . '/../php/action_search.php');
 
-if (isset($_GET['page'])) {
+if (!isset($_GET['page'])) {
     header('Location: not_found.php');
 }
 $page = $_GET['page'];

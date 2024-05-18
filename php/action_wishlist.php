@@ -3,7 +3,7 @@ session_start();
 
 $db = new PDO("sqlite:../database.db");
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST)) {
+if (isset($_POST)) {
     $data = json_decode(file_get_contents('php://input'), true);
 
     $user_id = $data['user_id'];
@@ -20,4 +20,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST)) {
 } else {
     echo json_encode(array("success" => false));
 }
-?>

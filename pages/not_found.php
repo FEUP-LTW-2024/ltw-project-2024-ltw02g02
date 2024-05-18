@@ -2,6 +2,7 @@
 session_start();
 $db = new PDO("sqlite:../database.db");
 require_once(__DIR__ . '/../php/navbar.tpl.php'); 
+require_once(__DIR__ . '/../php/data_fetch.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -22,3 +23,4 @@ require_once(__DIR__ . '/../php/navbar.tpl.php');
         <h1>The page you tried to access doesn't exist</h1>
         </div>
     </main>
+</body>

@@ -33,3 +33,46 @@ fileInput.addEventListener('change', (e) => {
 })
 
 checkbox.addEventListener('change', toggleContent);
+
+function fetchAttributes(category) {
+    let request = new XMLHttpRequest();
+    request.open('GET', '../php/fetch_attributes.php?category=' + encodeURIComponent(category), true);
+    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    request.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE) {
+            if (this.status === 200) {
+                let attributes = JSON.parse(this.responseText);
+                let wrapper = document.getElementById('attributes');
+                wrapper.innerHTML = '';
+            
+                attributes.forEach(function(attribute) {
+                    let inputField;
+                    let attributeName = document.createElement('h3');
+                    attributeName.innerHTML = attribute.name;
+                    if (attribute.data_type === 'text') {
+                        inputField = document.createElement('input');
+                        inputField.setAttribute('type', 'text');
+                    } else if (attribute.data_type === 'number') {
+                        inputField = document.createElement('input');
+                        inputField.setAttribute('type', 'number');
+                    } else if (attribute.data_type === 'boolean') {
+                        inputField = document.createElement('input');
+                        inputField.setAttribute('type', 'checkbox');
+                    }
+                    inputField.setAttribute('name', 'attribute_' + attribute.attribute_id);
+                    inputField.setAttribute('placeholder', attribute.name);
+                    wrapper.appendChild(attributeName);
+                    wrapper.appendChild(inputField);
+                });
+            } else {
+                console.error('Error fetching attributes:', request.status);
+            }
+        }
+    };
+    request.send();
+}
+
+document.getElementById('category').addEventListener('change', function() {
+    let selectedCategory = this.value;
+    fetchAttributes(selectedCategory);
+});

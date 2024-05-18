@@ -59,3 +59,4 @@ require_once(__DIR__ . '/../php/data_fetch.php');
         <script src="../script/edit.js"></script>
         <script src="../script/errors.js"></script>
     </main>
+</body>

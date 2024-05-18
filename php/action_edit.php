@@ -118,5 +118,5 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 
-header('Location: ../pages/profile.php');
+header('Location: ../pages/profile.php?user=' . $_SESSION['user_id']);
 

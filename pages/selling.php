@@ -3,6 +3,9 @@ session_start();
 $db = new PDO("sqlite:../database.db");
 require_once(__DIR__ . '/../php/navbar.tpl.php'); 
 require_once(__DIR__ . '/../php/data_fetch.php'); 
+$stmt = $db->prepare('SELECT * FROM Categories;');
+$stmt->execute();
+$categories = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +29,9 @@ require_once(__DIR__ . '/../php/data_fetch.php');
                 <input class="title-text" type="text" name ="title" placeholder="Write your listing title here..." minlength="4" maxlength="70">
                 <h3>Choose a fitting category</h3>
                 <select id="category" name="category">
-                    <option value="vehicles">Vehicles</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="technology">Technology</option>
-                    <option value="sports">Sports</option>
-                    <option value="literature">Literature</option>
-                    <option value="home">Home</option>
+                    <?php foreach ($categories as $category) { ?>
+                        <option value="<?=htmlspecialchars($category['category_id'])?>"><?=htmlspecialchars($category['name'])?></option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="add-image wrapper">
@@ -46,17 +46,20 @@ require_once(__DIR__ . '/../php/data_fetch.php');
                 <textarea class="big-text" id="description" name="description" maxlength="1000" minlength="20" placeholder="Write a fitting description for the item here..."required></textarea>
                 <h3>Choose a fitting condition</h3>
                 <select id="condition" name="condition">
-                    <option value="brand-new">Brand New</option>
-                    <option value="like-new">Like New</option>
-                    <option value="good">Good</option>
-                    <option value="fair">Fair</option>
-                    <option value="poor">Poor</option>
+                    <option value="Brand New">Brand New</option>
+                    <option value="Like New">Like New</option>
+                    <option value="Good">Good</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Poor">Poor</option>
                 </select>
             </div>
             <div class="add-details wrapper">
                 <h2>Details</h2>
                 <h3>Location<span class="required">*</span></h3>
                 <input class="small-text" type="text" name="location" placeholder="ex .: Lisbon, Portugal ..." required>
+                <div id="attributes">
+                    
+                </div>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="cellphone-checkbox">
                     <label for="cellphone-number">Associate Cellphone Number to listing?</label>

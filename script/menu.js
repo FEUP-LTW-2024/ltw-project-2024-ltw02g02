@@ -17,3 +17,4 @@ cross.addEventListener('click',function() {
     list.classList.toggle('dissapear');
     menu.classList.toggle('open');
 })
+
