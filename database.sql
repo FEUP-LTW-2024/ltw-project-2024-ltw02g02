@@ -68,6 +68,16 @@ CREATE TABLE Images (
     FOREIGN KEY (item_id) REFERENCES Items(item_id) ON DELETE CASCADE
 );
 
+CREATE TABLE Messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender_id INTEGER NOT NULL,
+    recipient_id INTEGER NOT NULL,
+    content TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users (user_id),
+    FOREIGN KEY (recipient_id) REFERENCES users (user_id)
+);
+
 INSERT INTO Categories (name) VALUES 
     ('Vehicles'),
     ('Clothing'),
