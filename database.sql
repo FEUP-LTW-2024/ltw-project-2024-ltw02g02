@@ -97,6 +97,7 @@ INSERT INTO Users (username, email, password) VALUES
     ('user3', 'user3@example.com', 'password3'),
     ('user4', 'user4@example.com', 'password4'),
     ('user5', 'user5@example.com', 'password5'),
+    ('admin','admin@example.com','$2y$10$lG2sgYIGzOT/jPNiHF2A2.nm3DTKdbm6CYrZQ/vc/nRWFNiGgRaFK'),
     ('example','example@example.com','$2y$10$lG2sgYIGzOT/jPNiHF2A2.nm3DTKdbm6CYrZQ/vc/nRWFNiGgRaFK');
 
 INSERT INTO Items (seller_id, title, description, price, condition, category_id, cellphone, location) VALUES
@@ -188,3 +189,5 @@ INSERT INTO ItemAttributes (attribute_id, item_id, value) VALUES
     (14, 7, 'Steel'),
     (15, 8, 'Board Game'),
     (16, 8, 'Hasbro');
+
+UPDATE Users SET admin = 1 WHERE user_id = 6;

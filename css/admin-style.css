@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'Blackout';
+    src: url('../fonts/Blackout\ Two\ AM.ttf') format('truetype');
+}
+
+:root {
+    --primary-color: #352F44;
+    --secondary-color: #5C5470;
+    --hyperlink-color: #FAF0E6;
+    --accent-gray: #B9B4C7;
+    --light-gray: #EEEEEE;
+    --transparent:  rgba(255,255,255,0)
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-top: 0;
+    font-weight: 750;
+}
+
+.wrapper {
+    width: 70%;
+    min-width: 550px;
+    background-color: white;
+    box-shadow: 0px 0px 15px 1px #352f4475;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+h3 {
+    color: var(--secondary-color);
+}
+
+.attributes-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.input-wrapper select, input {
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0px 4px 0px 0px #352f4450;
+
+}
+
+.add-category button {
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--hyperlink-color);
+    background-color: var(--secondary-color);
+    box-shadow: 0px 4px 0px 0px #352f4450;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-category button:hover {
+    background-color: var(--primary-color);
+}
+
+.add-category button:active {
+    box-shadow: 0px -2px 0px 0px #352f4450;
+    transform: translateY(4px);
+}

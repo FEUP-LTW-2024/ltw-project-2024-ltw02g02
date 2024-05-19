@@ -13,6 +13,10 @@ function correctPassword($user, $password) {
     return password_verify($password, $user['password']);
 }
 
+function generate_random_token() {
+    return bin2hex(openssl_random_pseudo_bytes(32));
+}
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 $user = emailExists($email);
@@ -34,6 +38,7 @@ $_SESSION['username'] = $user['username'];
 $_SESSION['email'] = $user['email'];
 $_SESSION['pfp_url'] = $user['pfp_url'];
 $_SESSION['is_admin'] = $user['admin'];
+$_SESSION['token'] = generate_random_token();
 
 header("Location: ../index.php");
 exit;
