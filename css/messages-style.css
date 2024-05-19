@@ -63,6 +63,24 @@ body {
 .chat {
     width: 70%;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Add this line */
+    max-height: 500px; /* Add this line */
+}
+
+.messages { /* Add this class */
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 500px;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
 }
 
 .message {
@@ -87,17 +105,20 @@ body {
 body > main > div > div.chat {
     display: flex;
     justify-content: center;
-    font-size: 1.5em;
-    font-weight: bold;
+    font-size: 1em;
     unicode-bidi: isolate;
 }
 
 .message.sent p {
     background: var(--accent-gray);
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 .message.received p {
-    background: #f8d7da;
+    background: #e6e6e6;
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 form {
@@ -129,4 +150,5 @@ form button {
 form button:hover {
     background: var(--accent-gray);
     color: black;
+    font-weight: bold;
 }

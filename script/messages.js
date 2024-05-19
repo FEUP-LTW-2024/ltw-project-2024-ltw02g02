@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const chatMessagesContainer = document.querySelector('.chat .messages');
-    const sendMessageForm = document.querySelector('.chat form');
+    const chatMessagesContainer = document.querySelector('.messages');
+    const sendMessageForm = document.querySelector('.send-message-form');
     const messageTextarea = sendMessageForm.querySelector('textarea');
 
     // Function to scroll to the bottom of the chat
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error fetching messages:', error));
     }
 
-    // Function to send a new message using AJAX
+    // Function to send a new message
     sendMessageForm.addEventListener('submit', event => {
         event.preventDefault();
 
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.success) {
                 messageTextarea.value = '';
-                fetchMessages(); // Fetch new messages after sending
+                fetchMessages();
             } else {
                 console.error('Error sending message:', data.error);
             }

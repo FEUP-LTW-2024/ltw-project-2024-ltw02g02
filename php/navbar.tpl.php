@@ -34,11 +34,11 @@ function drawNavbar(PDO $db) { ?>
                 <a href="">View My Listings</a>
             </div>
             <div class="menu-item">
-                <a href="../pages/messages.php">Mensagens</a>
+                <a href="../pages/messages.php">Messages</a>
             </div>
         </div>
         <div class="logout-wrapper">
-            <a href="">Log Out</a>
+        <a href="../php/logout.php">Log Out</a>
         </div>
         <?php endif; ?>
     </div>
