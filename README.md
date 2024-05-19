@@ -1,4 +1,4 @@
-# Your Project Name
+# Project Name
 
 Hand2Hand
 
