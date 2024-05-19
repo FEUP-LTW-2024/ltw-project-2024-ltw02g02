@@ -1,14 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const chatMessagesContainer = document.querySelector('.chat .messages');
-    const sendMessageForm = document.querySelector('.chat form');
+    const chatMessagesContainer = document.querySelector('.messages');
+    const sendMessageForm = document.querySelector('.send-message-form');
     const messageTextarea = sendMessageForm.querySelector('textarea');
 
-    // Function to scroll to the bottom of the chat
     function scrollToBottom() {
         chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
     }
 
-    // Function to fetch new messages
     function fetchMessages() {
         const recipientId = sendMessageForm.querySelector('input[name="recipient_id"]').value;
 
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => console.error('Error fetching messages:', error));
     }
 
-    // Function to send a new message using AJAX
     sendMessageForm.addEventListener('submit', event => {
         event.preventDefault();
 
@@ -46,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.success) {
                 messageTextarea.value = '';
-                fetchMessages(); // Fetch new messages after sending
+                fetchMessages();
             } else {
                 console.error('Error sending message:', data.error);
             }
@@ -54,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Error sending message:', error));
     });
 
-    // Escape HTML to prevent XSS attacks
     function escapeHtml(text) {
         const map = {
             '&': '&amp;',
@@ -66,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return text.replace(/[&<>"']/g, function(m) { return map[m]; });
     }
 
-    // Format timestamp to HH:MM format
     function formatTime(timestamp) {
         const date = new Date(timestamp);
         const hours = date.getHours().toString().padStart(2, '0');
@@ -74,9 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${hours}:${minutes}`;
     }
 
-    // Poll for new messages every 5 seconds
     setInterval(fetchMessages, 5000);
 
-    // Initial fetch of messages
     fetchMessages();
 });

@@ -34,7 +34,7 @@ function fetchAttributes(category) {
                         attributeName.innerHTML = attribute.name;
                         inputField.setAttribute('type', 'text');
                     } else if (attribute.data_type === 'number') {
-                        attributeName.innerHTML = 'Max ' + attribute.name;
+                        attributeName.innerHTML = attribute.name;
                         inputField = document.createElement('input');
                         inputField.setAttribute('type', 'number');
                     } else if (attribute.data_type === 'boolean') {

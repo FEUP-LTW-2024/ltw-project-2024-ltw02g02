@@ -5,6 +5,7 @@
   
 :root {
     --primary-color: #352F44;
+    --primary-dark: #25222C;
     --secondary-color: #5C5470;
     --hyperlink-color: #FAF0E6;
     --accent-gray: #B9B4C7;
@@ -154,34 +155,6 @@ li,a {
     font-size: 45px;
 }
 
-@media screen and (max-width: 900px) {
-    body {
-        padding-top: 95px;
-    }
-    main {
-        height: calc(100vh - 95px);
-    }
-
-    .navbar {
-        height: 95px;
-        padding-bottom: 10px;
-        box-sizing: border-box;
-    }
-
-    #searchDisplay {
-        display: none;
-    }
-    
-    .navbar-inner {
-        flex-direction: column;
-        padding: 0;
-    }
-
-    .searchbar {
-        top: 100px;
-    }
-  }
-
 .menuicons {
     position: relative;
 }
@@ -213,7 +186,7 @@ li,a {
     left: 0px;
     width: 200px;
     height: calc(100vh - 50px);
-    background-color: black;
+    background-color: var(--primary-dark);
     transform: translateX(-100%);
     transition: 0.5s ease;
     z-index: 999;
@@ -258,3 +231,36 @@ li,a {
         transform: translateY(0) translateX(-50%);
     }
 }
+
+@media screen and (max-width: 900px) {
+    body {
+        padding-top: 95px;
+    }
+    main {
+        height: calc(100vh - 95px);
+    }
+
+    .navbar {
+        height: 95px;
+        padding-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    #searchDisplay {
+        display: none;
+    }
+    
+    .navbar-inner {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .searchbar {
+        top: 100px;
+    }
+
+    .menu {
+        top: 95px;
+        height: calc(100vh - 95px);
+    }
+  }

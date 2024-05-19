@@ -140,3 +140,23 @@ h2 {
     text-decoration: underline;
     color: var(--primary-color);
 }
+
+@media screen and (max-width: 900px) {
+    .profile-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: scroll;
+    }
+    .profile-left {
+        border: none;
+    }
+
+    .profile-right {
+        border:none;
+        border-top: 1px solid var(--accent-gray);
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+}

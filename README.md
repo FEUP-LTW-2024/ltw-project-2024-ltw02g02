@@ -4,8 +4,8 @@ Hand2Hand
 
 ## Group ltw02g02
 
-- Gabriel Braga (up202012345) 33.3%
-- Guilherme Rego (up202012345) 33.3%
+- Gabriel Braga (up202207784) 33.3%
+- Guilherme Rego (up202207041) 33.3%
 - Diogo Ramos (up202012345) 33.3%
 
 ## Install Instructions
@@ -19,7 +19,9 @@ Hand2Hand
 
 ## Screenshots
 
-(2 or 3 screenshots of your website)
+![Homepage Picture](screenshots/homepage.png)
+![Wishlist Picture](screenshots/wishlist.png)
+![Search Picture](screenshots/search.png)
 
 ## Implemented Features
 
@@ -45,8 +47,8 @@ Hand2Hand
 
 **Admins**  should be able to:
 
-- [ ] Elevate a user to admin status.
-- [ ] Introduce new item categories, sizes, conditions, and other pertinent entities.
+- [] Elevate a user to admin status.
+- [✔] Introduce new item categories, sizes, conditions, and other pertinent entities.
 - [✔] Oversee and ensure the smooth operation of the entire system.
 
 **Security**:
@@ -54,6 +56,6 @@ We have been careful with the following security aspects:
 
 - [✔] **SQL injection**
 - [✔] **Cross-Site Scripting (XSS)**
-- [✔] **Cross-Site Request Forgery (CSRF)**
+- [] **Cross-Site Request Forgery (CSRF)**
 
 **Password Storage Mechanism**: password_hash

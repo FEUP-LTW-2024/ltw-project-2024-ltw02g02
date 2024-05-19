@@ -31,14 +31,16 @@ function drawNavbar(PDO $db) { ?>
     <?php if (isset($_SESSION['username'])): ?>
         <div class="menu-items">
             <div class="menu-item">
-                <a href="">View My Listings</a>
+                <a href="../pages/messages.php">Messages</a>
             </div>
+            <?php if ($_SESSION['is_admin'] == 1) { ?>
             <div class="menu-item">
-                <a href="../pages/messages.php">Mensagens</a>
+                <a href="../pages/admin.php">Administration</a>
             </div>
+            <?php } ?>
         </div>
         <div class="logout-wrapper">
-            <a href="">Log Out</a>
+        <a href="../php/logout.php">Log Out</a>
         </div>
         <?php endif; ?>
     </div>
