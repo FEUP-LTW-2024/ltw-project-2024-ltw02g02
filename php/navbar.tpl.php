@@ -13,7 +13,6 @@ function drawNavbar(PDO $db) { ?>
             <div class="navbar-right">
                 <?php if (isset($_SESSION['username'])): ?>
                     <li><a href="../pages/profile.php?user=<?=htmlspecialchars($_SESSION['user_id'])?>"><img id="pfp" src="<?=htmlspecialchars(fetchPFP($db, $_SESSION['user_id']))?>"> Profile</a></li>
-                    
                     <li><a href="../pages/wishlist.php">Wishlist</a></li>
                     <li><a href="../pages/selling.php">List Item</a></li>
                 <?php else: ?>
@@ -35,7 +34,7 @@ function drawNavbar(PDO $db) { ?>
                 <a href="">View My Listings</a>
             </div>
             <div class="menu-item">
-                <a href="">Mensagens</a>
+                <a href="../pages/messages.php">Mensagens</a>
             </div>
         </div>
         <div class="logout-wrapper">

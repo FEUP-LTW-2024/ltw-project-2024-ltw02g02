@@ -42,7 +42,7 @@ main {
     box-sizing: border-box;
 }
 
-.searchbar-replace input {
+.searchbar-replace > input {
     border: none;
     outline: none;
     font-size: 18px;
@@ -129,13 +129,61 @@ main {
 
 .search-filters {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 14%;
+    padding: 10px;
+    box-sizing: border-box;
     height: calc(100vh - 120px);
+    overflow: scroll;
     background-color: white;
     box-shadow: 0px 0px 15px 1px #352f4475;
     left: 0;
     top: 120px;
     border-top-right-radius: 5px;
+}
+
+.filter-input {
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0px 4px 0px 0px #352f4450;
+}
+
+.search-filters h3 {
+    margin: 0;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+.search-filters button {
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--hyperlink-color);
+    background-color: var(--secondary-color);
+    box-shadow: 0px 4px 0px 0px #352f4450;
+    cursor: pointer;
+}
+
+.search-filters button:hover {
+    background-color: var(--primary-color);
+}
+
+.search-filters button:active {
+    box-shadow: 0px -2px 0px 0px #352f4450;
+    transform: translateY(4px);
 }
 
 .item {

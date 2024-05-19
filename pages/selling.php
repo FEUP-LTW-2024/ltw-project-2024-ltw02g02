@@ -58,7 +58,7 @@ $categories = $stmt->fetchAll();
                 <h3>Location<span class="required">*</span></h3>
                 <input class="small-text" type="text" name="location" placeholder="ex .: Lisbon, Portugal ..." required>
                 <div id="attributes">
-                    
+
                 </div>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="cellphone-checkbox">
