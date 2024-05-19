@@ -1,0 +1,132 @@
+@font-face {
+    font-family: 'Blackout';
+    src: url('../fonts/Blackout\ Two\ AM.ttf') format('truetype');
+}
+
+:root {
+    --primary-color: #352F44;
+    --secondary-color: #5c5470;
+    --hyperlink-color: #FAF0E6;
+    --primary-dark: #25222C;
+    --accent-gray: #B9B4C7;
+    --transparent:  rgba(255,255,255,0)
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.message-container {
+    display: flex;
+    margin: 0;
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contacts {
+    width: 30%;
+    border-right: 1px solid #ddd;
+    background: #f9f9f9;
+    padding: 10px;
+}
+
+.contacts ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contacts li {
+    margin-bottom: 10px;
+}
+
+.contacts a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+.contacts a img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat {
+    width: 70%;
+    padding: 10px;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.message.sent {
+    text-align: right;
+}
+
+.message.received {
+    text-align: left;
+}
+
+.message p {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+    background: #e6e6e6;
+}
+
+body > main > div > div.chat {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+.message.sent p {
+    background: var(--accent-gray);
+}
+
+.message.received p {
+    background: #f8d7da;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+form textarea {
+    width: 80%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    resize: none;
+}
+
+form button {
+    width: 20%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background: var(--secondary-color);
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+form button:hover {
+    background: var(--accent-gray);
+    color: black;
+}

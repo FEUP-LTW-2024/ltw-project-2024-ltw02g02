@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS Attributes;
 DROP TABLE IF EXISTS ItemAttributes;
 DROP TABLE IF EXISTS Wishlist;
 DROP TABLE IF EXISTS Images;
+DROP TABLE IF EXISTS Messages;
 
 CREATE TABLE Users (
     user_id INTEGER PRIMARY KEY,
@@ -66,6 +67,16 @@ CREATE TABLE Images (
     item_id INTEGER NOT NULL,
     image_url TEXT,
     FOREIGN KEY (item_id) REFERENCES Items(item_id) ON DELETE CASCADE
+);
+
+CREATE TABLE Messages (
+    message_id INTEGER PRIMARY KEY,
+    sender_id INTEGER NOT NULL,
+    recipient_id INTEGER NOT NULL,
+    content TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (recipient_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
 INSERT INTO Categories (name) VALUES 
