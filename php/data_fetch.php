@@ -30,18 +30,6 @@ function fetchFirstImage(PDO $db, $item_id) {
     return $image[0];
 }
 
-function fetchFirstImageIndex(PDO $db, $item_id) {
-    $stmt = $db->prepare("SELECT image_url FROM Images WHERE item_id = :item_id LIMIT 1");
-    $stmt->bindParam(':item_id', $item_id);
-    $stmt->execute();
-    $image = $stmt->fetch();
-    if ($image === false) {
-        $image = '../images/no-image.png';
-        return $image;
-    }
-    return $image[0];
-}
-
 function fetchItem(PDO $db, $item_id) {
     $stmt = $db->prepare("SELECT * FROM Items WHERE item_id = :id");
     $stmt->bindParam(":id",$item_id);
