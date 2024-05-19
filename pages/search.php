@@ -8,16 +8,26 @@ require_once(__DIR__ . '/../php/action_search.php');
 if (!isset($_GET['page'])) {
     header('Location: not_found.php');
 }
+
 $page = $_GET['page'];
 
 if (isset($_GET['q'])) {
     $query = $_GET['q'];
-    $items = searchItems($db, $query, $page);
-    $pageCount = pageCount($db, $query);
+    if (isset($_GET['filtered'])) {
+        $items = filteredResult($db, $_GET);
+        $pageCount = count($items) > 0 ? 1 : 0;
+    } else {
+        $items = searchItems($db, $query, $page);
+        $pageCount = pageCount($db, $query);
+    }
 } else {
     $items = null;
     $pageCount = 1;
 }   
+
+$stmt = $db->prepare("SELECT * FROM Categories;");
+$stmt->execute();
+$categories = $stmt->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -39,13 +49,38 @@ if (isset($_GET['q'])) {
             <button type="submit"><i class="bi bi-search"></i></button>
             <input type="hidden" name="page" value="1">
         </form>
-        <div class="search-filters">
-        </div>
-        <?php if ($page >= 1 and $page <= $pageCount) {?>
+        <form class="apply-filters" action="search.php" method="get">
+            <input type="hidden" name="q" value="<?=$query?>">
+            <input type="hidden" name="page" value="1">
+            <div class="search-filters">
+                <h3>Categories</h3>
+                <select class="filter-input" id="category" name="category">
+                    <?php foreach ($categories as $category) { ?>
+                        <option value="<?=htmlspecialchars($category['category_id'])?>"><?=htmlspecialchars($category['name'])?></option>
+                    <?php } ?>
+                </select>
+                <h3>Maximum Price</h3>
+                <input class="filter-input" type="number" name="price">
+                <h3>Condition</h3>
+                <select class="filter-input" id="condition" name="condition">
+                    <option value="Brand New">Brand New</option>
+                    <option value="Like New">Like New</option>
+                    <option value="Good">Good</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Poor">Poor</option>
+                </select>
+                <div id="attributes">
+                </div>
+                <button type="submit">Apply Filters</i></button>
+                <input type="hidden" name="filtered" value="1">
+            </div>
+        </form>
+        <?php if ($page >= 1 and $page <= $pageCount and $pageCount !== 1) {?>
         <div class="buttons-wrapper">
             <form class="prev-page" action="search.php" method="get">
                 <input type="hidden" name="q" value="<?=$query?>">
                 <input type="hidden" name="page" value="<?=$page - 1?>">
+
                 <button id="prev-button" class="page-button" type="submit">◀</button>
             </form>
             <div class="current-page">
@@ -56,14 +91,13 @@ if (isset($_GET['q'])) {
                 <input type="hidden" name="page" value="<?=$page + 1?>">
                 <button id="next-button" class="page-button" type="submit">▶</button>
             </form>
-            <!-- Code for enabling/disabling buttons based on total pages and current page -->
-            <script>
-                var pageNumber = <?=$page?>;
-                var totalPages = <?=$pageCount?>;
-            </script>
-            <script src="../script/search.js"></script>
         </div>
         <?php } ?>
+        <script>
+                var pageNumber = <?=$page?>;
+                var totalPages = <?=$pageCount?>;
+        </script>
+        <script src="../script/search.js"></script>
         <div class="wrapper search-results">
         <?php if ($pageCount == 0) { ?>
             <h1>No matching items were found</h1>
