@@ -35,7 +35,7 @@
                 <div class='imgbox'>
                     <img src='" . htmlspecialchars($image) . "'>
                 </div>
-                <a class='title' href='pages/item.php?id=" . htmlspecialchars($item['item_id']) . "'>" . htmlspecialchars($item['title']) . "</a>
+                <a class='title' href='item.php?id=" . htmlspecialchars($item['item_id']) . "'>" . htmlspecialchars($item['title']) . "</a>
                 <p class ='small-text'>" . htmlspecialchars($item['location']) . "</p>
                 <p class ='small-text'>Published " . htmlspecialchars($item['publish_date']) . "</p>
             </article>";
