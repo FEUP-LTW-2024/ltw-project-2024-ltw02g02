@@ -11,7 +11,7 @@ if (isset($_POST['item_id'])) {
     
     $result = $stmt->execute();
     if ($result) {
-        header("Location: ../pages/profile.php");
+        header("Location: ../pages/profile.php?user=" . $_SESSION['user_id']);
         exit;
     } else {
         $errorMessage = "Error deleting item!";

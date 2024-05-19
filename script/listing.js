@@ -60,9 +60,9 @@ function fetchAttributes(category) {
                         inputField.setAttribute('type', 'checkbox');
                     }
                     inputField.setAttribute('name', 'attribute_' + attribute.attribute_id);
-                    inputField.setAttribute('placeholder', attribute.name);
                     wrapper.appendChild(attributeName);
                     wrapper.appendChild(inputField);
+                    inputField.classList.add('small-text')
                 });
             } else {
                 console.error('Error fetching attributes:', request.status);
@@ -76,3 +76,5 @@ document.getElementById('category').addEventListener('change', function() {
     let selectedCategory = this.value;
     fetchAttributes(selectedCategory);
 });
+
+document.getElementById('category').value = 9;
