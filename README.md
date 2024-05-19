@@ -10,8 +10,6 @@ Hand2Hand
 
 ## Install Instructions
 
-(adapt this)
-
     -git clone <https://github.com/FEUP-LTW-2024/ltw-project-2024-ltw02g02.git>
     -git checkout final-delivery-v1
     -sqlite database.db < database.sql
