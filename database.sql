@@ -11,6 +11,7 @@ CREATE TABLE Users (
     user_id INTEGER PRIMARY KEY,
     username TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
+    admin INTEGER DEFAULT 0,
     join_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     pfp_url TEXT DEFAULT '../images/userdefault.jpg',
     password TEXT NOT NULL

@@ -70,20 +70,33 @@ $formattedPrice = formatPrice($item['price'], $item['currency']);
             <h2>Seller's description</h2>
             <div id="description-scroll">
                 <p class="description"><?php echo htmlspecialchars($item['description']); ?></p>
+                <div class="attributes">
+                <?php 
+                $attributes = fetchAttributes($db, $item['item_id']);
+                $category = getCategoryName($db, $item['category_id']);
+                ?>
+                <p class="attribute">Category: <?=$category?></p>
+                <?php foreach ($attributes as $id => $value) { ?>
+                    <p class="attribute"><?=getAttributeName($db,$id)?>: <?=$value?></p>
+                <?php } ?>
+                </div>
             </div>
             <p class="location"><?php echo htmlspecialchars($item['location']); ?></p>
         </div>
         <div id="seller">
             <h2>Seller Information</h2>
             <div class="user-box">
-                <img id="profile-picture" src="<?php echo htmlspecialchars(fetchPFP($db, $seller['user_id'])); ?>">
-                <a id="seller-name" href="profile.php?user=<?=htmlspecialchars($seller['user_id'])?>"><?php echo htmlspecialchars($seller['username']); ?></a></p>
-                <?php if (isset($_SESSION['username'])): ?>
-                <a id="message-button" href="messages.php?user=<?=htmlspecialchars($seller['user_id'])?>">
-                    <button class="message-btn">Message</button>
-                </a>
-                <?php endif; ?>
+                    <img id="profile-picture" src="<?php echo htmlspecialchars(fetchPFP($db, $seller['user_id'])); ?>">
+                    <a id="seller-name" href="profile.php?user=<?=htmlspecialchars($seller['user_id'])?>"><?php echo htmlspecialchars($seller['username']); ?></a>
             </div>
+            <?php if (isset($_SESSION['username'])): ?>
+                <a id="message-button" href="messages.php?user=<?=htmlspecialchars($seller['user_id'])?>">
+                    <button class="message-btn">Message Seller</button>
+                </a>
+            <?php endif; ?>
+            <?php if ($item['cellphone'] !== '') { ?>
+            <p class="cellphone"><?=htmlspecialchars($item['cellphone'])?></p>
+            <?php } ?>
             <p class="small-text">Joined <?php echo date('Y', strtotime(htmlspecialchars($seller['join_date']))) ?></p>
         </div>
     </div>

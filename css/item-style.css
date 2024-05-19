@@ -146,7 +146,9 @@ h2 {
 }
 
 #description-scroll {
-    height: calc(100%);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     overflow: scroll;
     flex-grow: 1;
     height: 0px;
@@ -156,6 +158,21 @@ h2 {
 .description {
     font-weight: 350;
     margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.attributes {
+    display: flex;
+    flex-wrap: wrap;
+    gap:5px
+}
+
+.attribute {
+    border: 2px solid var(--accent-gray);
+    border-radius: 5px;
+    padding: 10px;
+    text-wrap: nowrap;
+    font-weight: bold;
 }
 
 p {
@@ -175,9 +192,17 @@ p {
 
 .user-box {
     display: flex;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     align-items: center;
-    margin-left: 5px;
-    margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    gap: 10px;
 }
 
 #profile-picture {
@@ -186,7 +211,6 @@ p {
     border-radius: 999px;
     object-fit: cover;
     box-shadow: 0px 0px 0px 3px rgba(150, 150, 150, 0.25);
-    margin-right: 10px;
 }
 
 #seller-name {
@@ -198,4 +222,28 @@ p {
 #seller-name:hover {
     text-decoration: underline;
     font-weight: 700
+}
+
+.message-btn {
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--hyperlink-color);
+    background-color: var(--secondary-color);
+    box-shadow: 0px 4px 0px 0px #352f4450;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.message-btn:hover {
+    background-color: var(--primary-color);
+}
+
+.message-btn:active {
+    box-shadow: 0px -2px 0px 0px #352f4450;
+    transform: translateY(4px);
 }

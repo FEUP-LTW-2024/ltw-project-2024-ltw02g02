@@ -15,7 +15,6 @@ function correctPassword($user, $password) {
 
 $email = $_POST['email'];
 $password = $_POST['password'];
-
 $user = emailExists($email);
 
 if (!$user) {
@@ -30,12 +29,12 @@ if (!correctPassword($user, $password)) {
     exit;
 }
 
-// Armazenando dados do usuário na sessão
 $_SESSION['user_id'] = $user['user_id'];
 $_SESSION['username'] = $user['username'];
 $_SESSION['email'] = $user['email'];
 $_SESSION['pfp_url'] = $user['pfp_url'];
+$_SESSION['is_admin'] = $user['admin'];
 
 header("Location: ../index.php");
 exit;
-?>
+

@@ -122,20 +122,48 @@ function emailExists($email) {
     return $stmt->fetch() !== false;
 }
 
+function fetchAttributes(PDO $db, $item_id) {
+    $itemAttributes = [];
+    $stmt = $db->prepare('SELECT i.item_id as id,ia.attribute_id as attribute,ia.value as value FROM Items i Join ItemAttributes ia ON i.item_id = ia.item_id WHERE i.item_id = :item_id');
+    $stmt->bindParam(':item_id', $item_id);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    foreach ($results as $row) {
+        $itemAttributes[$row['attribute']] = $row['value'];
+    }
+    return $itemAttributes;
+}
+
+function getAttributeName(PDO $db, $attribute_id) {
+    $stmt = $db->prepare('SELECT name FROM Attributes WHERE attribute_id = :attribute_id');
+    $stmt->bindParam(':attribute_id', $attribute_id);
+    $stmt->execute();
+    $name = $stmt->fetch();
+    return $name['name'];
+}
+
+function getCategoryName(PDO $db, $category_id) {
+    $stmt = $db->prepare('SELECT name FROM Categories WHERE category_id = :category_id');
+    $stmt->bindParam(':category_id', $category_id);
+    $stmt->execute();
+    $name = $stmt->fetch();
+    return $name['name'];
+}
+
 function fetchChatUsers($db, $user_id) {
     $stmt = $db->prepare('SELECT DISTINCT u.user_id, u.username FROM users u JOIN messages m ON u.user_id = m.sender_id OR u.user_id = m.recipient_id WHERE (m.sender_id = :user_id OR m.recipient_id = :user_id) AND u.user_id != :user_id');
-    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->bindValue(':user_id', $user_id);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
 }
 
 function fetchMessages($db, $user_id, $contact_id) {
     $stmt = $db->prepare("SELECT * FROM messages WHERE (sender_id = :user_id AND recipient_id = :contact_id)
                           OR (sender_id = :contact_id AND recipient_id = :user_id) ORDER BY timestamp ASC");
-    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
-    $stmt->bindValue(':contact_id', $contact_id, PDO::PARAM_INT);
+    $stmt->bindValue(':user_id', $user_id);
+    $stmt->bindValue(':contact_id', $contact_id);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
 }
 
 function fetchContacts($db, $userId) {
@@ -143,9 +171,9 @@ function fetchContacts($db, $userId) {
               JOIN Messages m ON u.user_id = m.sender_id OR u.user_id = m.recipient_id 
               WHERE (m.sender_id = :userId OR m.recipient_id = :userId) AND u.user_id != :userId";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->bindParam(':userId', $userId);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
 }
 
 ?>

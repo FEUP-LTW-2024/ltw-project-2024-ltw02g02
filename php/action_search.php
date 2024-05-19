@@ -1,4 +1,6 @@
 <?php 
+require_once(__DIR__ . '/data_fetch.php');
+
 function searchItems(PDO $db, string $query, $page) {
     $query = trim($query);
 
@@ -35,18 +37,6 @@ function pageCount(PDO $db, string $query) {
     }
     $numOfPages = ceil($numOfItems / 5);
     return $numOfPages;
-}
-
-function fetchAttributes(PDO $db, $item_id) {
-    $itemAttributes = [];
-    $stmt = $db->prepare('SELECT i.item_id as id,ia.attribute_id as attribute,ia.value as value FROM Items i Join ItemAttributes ia ON i.item_id = ia.item_id WHERE i.item_id = :item_id');
-    $stmt->bindParam(':item_id', $item_id);
-    $stmt->execute();
-    $results = $stmt->fetchAll();
-    foreach ($results as $row) {
-        $itemAttributes[$row['attribute']] = $row['value'];
-    }
-    return $itemAttributes;
 }
 
 function filteredResult(PDO $db, $data) {
